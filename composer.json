@@ -1,0 +1,16 @@
+{
+    "name": "dannydeeps/oni",
+    "description": "Discord bot for Oni clan.",
+    "type": "discord-bot",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Huggins",
+            "email": "contactdanielhuggins@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "team-reflex/discord-php": "^5.1"
+    }
+}
