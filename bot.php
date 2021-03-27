@@ -138,6 +138,8 @@ $discord->on('ready', function(Discord $discord)
             'color' => '#00FF00',
             'thumbnail' => [
                 'url' => $member->user->avatar,
+                'width' => 32,
+                'height' => 32
             ]
         ]);
         $channel= $discord->getChannel(Channels::WELCOME);
