@@ -41,6 +41,8 @@ $discord->on('ready', function(Discord $discord)
                 foreach ($react_array as $react) {
                     $channel->getMessage($message_id)->done(function(Message $roleMsg) use ($react) {
                         $roleMsg->react($react);
+                    }, function($e) {
+                        echo "Error: {$e->getMessage()}";
                     });
                 }
                 break;
