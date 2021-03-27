@@ -136,7 +136,7 @@ $discord->on('ready', function(Discord $discord)
         }
     });
 
-    $discord->on(Event::GUILD_MEMBER_ADD, function (Member $member, Discord $discord) {
+    $discord->on('GUILD_MEMBER_ADD', function (Member $member, Discord $discord) {
         // $embed= new Embed($discord, [
         //     'title' => $member->user->username,
         //     'description' => 'Another demon joins our army!',
