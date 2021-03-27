@@ -19,8 +19,8 @@ $discord->on('ready', function(Discord $discord)
     {
         switch (strtolower($message->content)) {
             case '!initrole':
-                $channel = $discord->getChannel('12345');
-                $channel->sendMessage('Select a reaction to designate your role!')->done(function(Message $msg) use ($channel) {
+                $channel = $discord->getChannel('825144851267977256');
+                $channel->sendMessage('Select a reaction to designate your role!')->done(function(Message $msg) {
 
                     // Solution #1
                     // $msg->react(':Heal:825145748936589312')->done(function(Message $msg) {
