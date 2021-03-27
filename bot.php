@@ -130,6 +130,7 @@ $discord->on('ready', function(Discord $discord)
     });
 
     $discord->on(Event::GUILD_MEMBER_ADD, function (Member $member, Discord $discord) {
+        echo print_r($member);
         $embed= new Embed($discord, [
             'title' => $member->username,
             'description' => 'Another demon joins our army!',
