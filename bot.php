@@ -22,7 +22,7 @@ $discord->on('ready', function(Discord $discord) {
         switch (strtolower($message->content)) {
             case '!initrole':
                 $selectRoleMsg= new Message($discord, [
-                    'channel_id' => '12345',
+                    'channel_id' => '825144851267977256',
                     'content' => 'Select a reaction to designate your role.'
                 ]);
                 $selectRoleMsg->reply($selectRoleMsg->content);
@@ -34,3 +34,5 @@ $discord->on('ready', function(Discord $discord) {
 
 
 $discord->run();
+
+// hi all, just started looking at this library and im trying to create a command that will initialise a message in a 'roles' text channel, this is where I am so far
