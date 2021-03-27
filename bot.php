@@ -24,9 +24,9 @@ $discord->on('ready', function(Discord $discord)
                 $promise= $channel->sendMessage('Select a reaction to designate your role!');
                 $react_array= [
                     'Heal' => ':Heal:825145748936589312',
-                    'Tank' => ':Tank:825357985030209576',
-                    'Range' => ':Range:825357985030209576',
-                    'Attack' => ':Attack:825357985030209576'
+                    'Tank' => ':Tank:825152268340953109',
+                    'Range' => ':Range:825150110571954197',
+                    'Attack' => ':Attack:825152209950867467'
                 ];
                 $results= [];
                 foreach ($react_array as $name => $code) {
