@@ -19,10 +19,11 @@ $discord->on('ready', function(Discord $discord) {
     $discord->on('message', function (Message $message, Discord $discord) {
         switch (strtolower($message->content)) {
             case '!initrole':
-                $message = new Message($discord);
-                $message->content= 'Test';
-
-                die('<pre>'.print_r($discord,true).'</pre>');
+                $discord->guilds->fetch('ONI')->done(function(Guild $guild) {
+                    $guild->channels->fetch('roles')->done(function(Channel $channel) {
+                        die('<pre>'.print_r($channel,true).'</pre>');
+                    });
+                });
                 break;
         }
     });
