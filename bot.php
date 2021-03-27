@@ -21,11 +21,10 @@ $discord->on('ready', function(Discord $discord)
             case '!initrole':
                 $channel = $discord->getChannel('825144851267977256');
                 $channel->sendMessage('Select a reaction to designate your role!')->done(function(Message $msg) {
-                    $msg->react(':Heal:825145748936589312')->done(function() {
-                        echo "Reaction added";
-                    }, function($e) {
-                        echo "Error: " . $e->getMessage();
-                    });
+                    $msg->react(':Heal:825145748936589312');
+                    $msg->react(':Tank:825357985030209576');
+                    $msg->react(':Range:825357985030209576');
+                    $msg->react(':Attack:825357985030209576');
                 }, function($e) {
                     echo "Error: {$e->getMessage()}";
                 });
@@ -33,8 +32,8 @@ $discord->on('ready', function(Discord $discord)
             case '!initregion':
                 $channel = $discord->getChannel('825144851267977256');
                 $channel->sendMessage('Select a reaction to designate your region!')->done(function(Message $msg) {
-                    $msg->react(':EU:');
-                    $msg->react(':NA:');
+                    $msg->react(':EU:825357985030209576');
+                    $msg->react(':NA:825357985030209576');
                 }, function($e) {
                     echo "Error: {$e->getMessage()}";
                 });
