@@ -57,15 +57,15 @@ $discord->on('ready', function(Discord $discord)
                 //     echo "Error: {$e->getMessage()}";
                 // });
                 break;
-            case '!initregion':
-                $channel = $discord->getChannel('825144851267977256');
-                $channel->sendMessage('Select a reaction to designate your region!')->done(function(Message $msg) {
-                    $msg->react(':EU:825357985030209576');
-                    $msg->react(':NA:825357985030209576');
-                }, function($e) {
-                    echo "Error: {$e->getMessage()}";
-                });
-                break;
+            // case '!initregion':
+            //     $channel = $discord->getChannel('825144851267977256');
+            //     $channel->sendMessage('Select a reaction to designate your region!')->done(function(Message $msg) {
+            //         $msg->react(':EU:825357985030209576');
+            //         $msg->react(':NA:825357985030209576');
+            //     }, function($e) {
+            //         echo "Error: {$e->getMessage()}";
+            //     });
+            //     break;
         }
     });
 });
