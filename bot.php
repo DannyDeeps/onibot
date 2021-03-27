@@ -26,7 +26,7 @@ $discord->on('ready', function(Discord $discord)
                     'Attack' => ':Attack:825357985030209576'
                 ];
 
-                $channel = $discord->getChannel('12345');
+                $channel = $discord->getChannel('825144851267977256');
                 $channel->sendMessage('Select a reaction to designate your role!')->done(function ($new_message) use ($message, $react_array) {
                     $promise = null;
                     $string = '';
