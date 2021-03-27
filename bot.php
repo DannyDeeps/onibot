@@ -20,26 +20,26 @@ $discord->on('ready', function(Discord $discord)
         switch (strtolower($message->content)) {
             case '!initrole':
                 $channel = $discord->getChannel('825144851267977256');
-                $channel->sendMessage('Select a reaction to designate your role!')->done('success', 'error');
+                $channel->sendMessage('Select a reaction to designate your role!')->done(function(Message $msg) {
+                    $msg->react(':Heal:');
+                    $msg->react(':Tank:');
+                    $msg->react(':Attack:');
+                    $msg->react(':Ranged:');
+                }, function($e) {
+                    echo "Error: {$e->getMessage()}";
+                });
                 break;
             case '!initregion':
                 $channel = $discord->getChannel('825144851267977256');
-                $channel->sendMessage('Select a reaction to designate your region!')->done('success', 'error');
+                $channel->sendMessage('Select a reaction to designate your region!')->done(function(Message $msg) {
+                    $msg->react(':EU:');
+                    $msg->react(':NA:');
+                }, function($e) {
+                    echo "Error: {$e->getMessage()}";
+                });
                 break;
         }
     });
 });
 
-function success(String $msg)
-{
-    echo 'Success' . $msg."\r\n";
-}
-function error($e)
-{
-    echo 'Error: ' . $e->getMessage() . "\r\n";
-}
-
-
 $discord->run();
-
-// hi all, just started looking at this library and im trying to create a command that will initialise a message in a 'roles' text channel, this is where I am so far
