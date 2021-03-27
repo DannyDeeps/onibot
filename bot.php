@@ -132,11 +132,12 @@ $discord->on('ready', function(Discord $discord)
 
     $discord->on(Event::GUILD_MEMBER_ADD, function (Member $member, Discord $discord)
     {
+        $thumbnail= 'data:image/png;base64,'.base64_encode(file_get_contents($member->user->avatar));
         $embed= new Embed($discord, [
             'title' => $member->user->username,
             'description' => 'Another demon joins our army!',
             'color' => '#00FF00',
-            'thumbnail' => base64_encode(file_get_contents($member->user->avatar))
+            'thumbnail' => $thumbnail
         ]);
         $channel= $discord->getChannel(Channels::WELCOME);
         $channel->sendMessage('', false, $embed)->done(null, function($e) {
