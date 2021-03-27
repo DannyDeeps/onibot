@@ -14,10 +14,6 @@ use Oni\Identify\Channels;
 
 require __DIR__ . '/vendor/autoload.php';
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 $discord = new Discord([
     'token' => 'ODI1MTU0MTc3NzcyMTU5MDM2.YF5ytg.c6tGhN9N4XPDJQnxeXU0An3EtFw',
     'loop' => Factory::create(),
@@ -27,8 +23,6 @@ $discord = new Discord([
 
 $discord->on('ready', function(Discord $discord)
 {
-    // echo print_r($discord->users);
-
     // LISTEN FOR COMMANDS
     $discord->on(Event::MESSAGE_CREATE, function (Message $message, Discord $discord)
     {
@@ -136,15 +130,15 @@ $discord->on('ready', function(Discord $discord)
         }
     });
 
-    $discord->on('GUILD_MEMBER_ADD', function (Member $member, Discord $discord) {
-        // $embed= new Embed($discord, [
-        //     'title' => $member->user->username,
-        //     'description' => 'Another demon joins our army!',
-        //     'color' => '#00FF00',
-        //     'thumbnail' => $member->user->avatar
-        // ]);
+    $discord->on(Event::GUILD_MEMBER_ADD, function (Member $member, Discord $discord) {
+        $embed= new Embed($discord, [
+            'title' => $member->user->username,
+            'description' => 'Another demon joins our army!',
+            'color' => '#00FF00',
+            'thumbnail' => $member->user->avatar
+        ]);
         $channel= $discord->getChannel(Channels::WELCOME);
-        $channel->sendMessage('Is someone there? ...it must have been the wind!')->done(null, function($e) {
+        $channel->sendMessage('', false, $embed)->done(null, function($e) {
             echo "ERROR: {$e->getMessage()}";
         });
     }, function($e) {
