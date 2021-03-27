@@ -20,9 +20,12 @@ $discord->on('ready', function(Discord $discord)
     {
         switch (strtolower($message->content)) {
             case '!initrole':
-                $content= "\nReact to this message to get your classes!\n";
+                $content= "> 
+                > React to this message to get your classes!
+                > ";
+
                 $channel = $discord->getChannel('825144851267977256');
-                $promise= $channel->sendMessage(">>>".$content);
+                $promise= $channel->sendMessage($content);
                 $react_array= [
                     'Heal' => ':Heal:825145748936589312',
                     'Tank' => ':Tank:825152268340953109',
