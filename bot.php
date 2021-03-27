@@ -3,6 +3,7 @@
 use Discord\Discord;
 use Discord\WebSockets\Event;
 use Discord\Parts\Channel\{ Guild, Channel, Message };
+use Discord\Parts\User\Member
 use Discord\Parts\Embed\Embed;
 use Discord\Parts\WebSockets\MessageReaction;
 use React\Http\Message\Response;
@@ -13,10 +14,9 @@ use Oni\Identify\Channels;
 
 require __DIR__ . '/vendor/autoload.php';
 
-$loop = Factory::create();
 $discord = new Discord([
     'token' => 'ODI1MTU0MTc3NzcyMTU5MDM2.YF5ytg.c6tGhN9N4XPDJQnxeXU0An3EtFw',
-    'loop' => $loop,
+    'loop' => Factory::create(),
     'disabledEvents' => []
 ]);
 
@@ -127,6 +127,15 @@ $discord->on('ready', function(Discord $discord)
                     break;
             }
         }
+    });
+
+    $discord->on(Event::GUILD_MEMBER_ADD, function (Member $member, Discord $discord) {
+        $embed= new Embed($discord, [
+            'title' => $member->username,
+            'description' => 'Another demon joins our army!',
+            'color' => '#00FF00',
+            'thumbnail' => $member->user->avatar
+        ]);
     });
 });
 
