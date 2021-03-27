@@ -19,32 +19,38 @@ $discord->on('ready', function(Discord $discord)
     {
         switch (strtolower($message->content)) {
             case '!initrole':
-                // $channel = $discord->getChannel('825144851267977256');
-                // $channel->sendMessage('Select a reaction to designate your role!')->done(function ($new_message) use ($message) {
-                //     $react_array= [':Heal:825145748936589312',':Tank:825357985030209576',':Range:825357985030209576',':Attack:825357985030209576'];
-                //     $promise = null;
-                //     $string = '';
-                //     $string1 = '$promise = $new_message->react(array_shift($react_array))->done(function () use ($react_array, $i, $new_message) {';
-                //     $string2 = '});';
-                //     for ($i = 0; $i < count($react_array); $i++) {
-                //       $string .= $string1;
-                //     }
-                //     for ($i = 0; $i < count($react_array); $i++) {
-                //       $string .= $string2;
-                //     }
-                //     eval($string); //I really hate this language sometimes
-                // });
-
-                $message_id= $message->id;
+                $react_array= [
+                    'Heal' => ':Heal:825145748936589312',
+                    'Tank' => ':Tank:825357985030209576',
+                    'Range' => ':Range:825357985030209576',
+                    'Attack' => ':Attack:825357985030209576'
+                ];
+                
                 $channel = $discord->getChannel('825144851267977256');
-                $react_array= [':Heal:825145748936589312',':Tank:825357985030209576',':Range:825357985030209576',':Attack:825357985030209576'];
-                foreach ($react_array as $react) {
-                    $channel->getMessage($message_id)->done(function(Message $roleMsg) use ($react) {
-                        $roleMsg->react($react);
-                    }, function($e) {
-                        echo "Error: {$e->getMessage()}";
-                    });
-                }
+                $channel->sendMessage('Select a reaction to designate your role!')->done(function ($new_message) use ($message, $react_array) {
+                    $promise = null;
+                    $string = '';
+                    $string1 = '$promise = $new_message->react(array_shift($react_array))->done(function () use ($react_array, $i, $new_message) {';
+                    $string2 = '});';
+                    for ($i = 0; $i < count($react_array); $i++) {
+                      $string .= $string1;
+                    }
+                    for ($i = 0; $i < count($react_array); $i++) {
+                      $string .= $string2;
+                    }
+                    eval($string); //I really hate this language sometimes
+                });
+
+                // $message_id= $message->id;
+                // $channel = $discord->getChannel('825144851267977256');
+                // $react_array= [':Heal:825145748936589312',':Tank:825357985030209576',':Range:825357985030209576',':Attack:825357985030209576'];
+                // foreach ($react_array as $react) {
+                //     $channel->getMessage($message_id)->done(function(Message $roleMsg) use ($react) {
+                //         $roleMsg->react($react);
+                //     }, function($e) {
+                //         echo "Error: {$e->getMessage()}";
+                //     });
+                // }
                 break;
             case '!initregion':
                 $channel = $discord->getChannel('825144851267977256');
@@ -57,6 +63,8 @@ $discord->on('ready', function(Discord $discord)
                 break;
         }
     });
+
+    
 });
 
 $discord->run();
