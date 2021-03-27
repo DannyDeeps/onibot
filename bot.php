@@ -1,9 +1,9 @@
 <?php
 
 use Discord\Discord;
-use Discord\Parts\Channel\Message;
-use Psr\Http\Message\ResponseInterface;
+use Discord\Parts\Channel\{ Guild, Channel, Message };
 use React\EventLoop\Factory;
+use Psr\Http\Message\ResponseInterface;
 use React\Http\Browser;
 
 require __DIR__ . '/vendor/autoload.php';
