@@ -20,7 +20,7 @@ $discord->on('ready', function(Discord $discord)
         switch (strtolower($message->content)) {
             case '!initrole':
                 $channel = $discord->getChannel('825144851267977256');
-                $channel->sendMessage($content)->done(function ($new_message) use ($message) {
+                $channel->sendMessage('Select a reaction to designate your role!')->done(function ($new_message) use ($message) {
                     $react_array= [':Heal:825145748936589312',':Tank:825357985030209576',':Range:825357985030209576',':Attack:825357985030209576'];
                     $promise = null;
                     $string = '';
