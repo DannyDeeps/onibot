@@ -14,6 +14,10 @@ use Oni\Identify\Channels;
 
 require __DIR__ . '/vendor/autoload.php';
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 $discord = new Discord([
     'token' => 'ODI1MTU0MTc3NzcyMTU5MDM2.YF5ytg.c6tGhN9N4XPDJQnxeXU0An3EtFw',
     'loop' => Factory::create(),
