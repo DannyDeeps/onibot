@@ -28,6 +28,9 @@ $discord->on('ready', function(Discord $discord)
 
                 $channel = $discord->getChannel('825144851267977256');
                 $channel->sendMessage('Select a reaction to designate your role!')->done(function ($new_message) use ($message, $react_array) {
+                    echo var_dump($new_message);
+                    return;
+
                     $promise = null;
                     $string = '';
                     $string1 = '$promise = $new_message->react(array_shift($react_array))->done(function () use ($react_array, $i, $new_message) {';
