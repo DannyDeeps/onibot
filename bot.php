@@ -21,7 +21,6 @@ $discord->on('ready', function(Discord $discord)
     {
         switch (strtolower($message->content)) {
             case '!initrole':
-
                 $embed= new Embed($discord, [
                     'title' => 'Classes',
                     'description' => 'Select the reactions below to be assigned the roles you prefer to play.',
@@ -48,44 +47,37 @@ $discord->on('ready', function(Discord $discord)
                 $promise->done(function() use ($results) {
                     return new Response(200, ['Content-Type' => 'application/json'], json_encode($results));
                 });
-
-
-                // $channel = $discord->getChannel('825144851267977256');
-                // $channel->sendMessage('Select a reaction to designate your role!')->done(function ($new_message) use ($message, $react_array) {
-                //     echo var_dump($new_message);
-                //     return;
-
-                //     $promise = null;
-                //     $string = '';
-                //     $string1 = '$promise = $new_message->react(array_shift($react_array))->done(function () use ($react_array, $i, $new_message) {';
-                //     $string2 = '});';
-                //     for ($i = 0; $i < count($react_array); $i++) {
-                //       $string .= $string1;
-                //     }
-                //     for ($i = 0; $i < count($react_array); $i++) {
-                //       $string .= $string2;
-                //     }
-                //     eval($string); //I really hate this language sometimes
-                // }, function($e) {
-                //     ob_flush();
-                //     ob_start();
-                //     var_dump($e);
-                //     file_put_contents("error.txt", ob_get_flush());
-                // });
                 break;
             case '!initregion':
+                $embed= new Embed($discord, [
+                    'title' => 'Region',
+                    'description' => 'Select the reactions below to be assigned the region you prefer to play on.',
+                    'color' => '#00FF00'
+                ]);
+
                 $channel = $discord->getChannel('825144851267977256');
-                $channel->sendMessage('Select a reaction to designate your region!')->done(function(Message $msg) {
-                    $msg->react(':EU:825357985030209576');
-                    $msg->react(':NA:825357985030209576');
-                }, function($e) {
-                    echo "Error: {$e->getMessage()}";
+                $promise= $channel->sendMessage('', false, $embed);
+                $react_array= [
+                    'EU' => ':EU:825357985030209576',
+                    'NA' => ':NA:825357985030209576',
+                    'Range' => ':Range:825150110571954197',
+                    'Attack' => ':Attack:825152209950867467'
+                ];
+                $results= [];
+                foreach ($react_array as $name => $code) {
+                    $promise->then(function(Message $message) use ($code) {
+                        $results[]= $message->react($code);
+                    }, function($e) {
+                        echo "Error: " . $e->getMessage();
+                    });
+                }
+
+                $promise->done(function() use ($results) {
+                    return new Response(200, ['Content-Type' => 'application/json'], json_encode($results));
                 });
                 break;
         }
     });
-
-    
 });
 
 $discord->run();
