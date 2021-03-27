@@ -136,6 +136,8 @@ $discord->on('ready', function(Discord $discord)
             'color' => '#00FF00',
             'thumbnail' => $member->user->avatar
         ]);
+        $channel= $discord->getChannel(Channels::WELCOME);
+        $channel->sendMessage('', false, $embed);
     });
 });
 
