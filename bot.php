@@ -20,6 +20,7 @@ $discord->on('ready', function(Discord $discord)
         switch (strtolower($message->content)) {
             case '!initrole':
                 $message->channel->sendMessage($content)->done(function ($new_message) use ($message) {
+                    $react_array= [':Heal:825145748936589312',':Tank:825357985030209576',':Range:825357985030209576',':Attack:825357985030209576'];
                     $promise = null;
                     $string = '';
                     $string1 = '$promise = $new_message->react(array_shift($react_array))->done(function () use ($react_array, $i, $new_message) {';
@@ -32,6 +33,7 @@ $discord->on('ready', function(Discord $discord)
                     }
                     eval($string); //I really hate this language sometimes
                 }
+                break;
                 // $channel->sendMessage('Select a reaction to designate your role!')->done(function(Message $message) use ($discord, $channel) {
                     
 
@@ -59,7 +61,6 @@ $discord->on('ready', function(Discord $discord)
                 // }, function($e) {
                 //     echo "Error: {$e->getMessage()}";
                 // });
-                break;
             case '!initregion':
                 $channel = $discord->getChannel('825144851267977256');
                 $channel->sendMessage('Select a reaction to designate your region!')->done(function(Message $msg) {
