@@ -139,10 +139,10 @@ $discord->on('ready', function(Discord $discord)
         ]);
         $channel= $discord->getChannel(Channels::WELCOME);
         $channel->sendMessage('', false, $embed)->done(null, function($e) {
-            echo "ERROR: {$e->getMessage()}";
+            echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]";
         });
     }, function($e) {
-        echo "ERROR: {$e->getMessage()}";
+        echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]";
     });
 });
 
