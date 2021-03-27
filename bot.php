@@ -25,8 +25,8 @@ $discord->on('ready', function(Discord $discord)
                     'Range' => ':Range:825357985030209576',
                     'Attack' => ':Attack:825357985030209576'
                 ];
-                
-                $channel = $discord->getChannel('825144851267977256');
+
+                $channel = $discord->getChannel('12345');
                 $channel->sendMessage('Select a reaction to designate your role!')->done(function ($new_message) use ($message, $react_array) {
                     $promise = null;
                     $string = '';
@@ -39,18 +39,9 @@ $discord->on('ready', function(Discord $discord)
                       $string .= $string2;
                     }
                     eval($string); //I really hate this language sometimes
+                }, function($e) {
+                    echo "Error: {$e->getMessage()}";
                 });
-
-                // $message_id= $message->id;
-                // $channel = $discord->getChannel('825144851267977256');
-                // $react_array= [':Heal:825145748936589312',':Tank:825357985030209576',':Range:825357985030209576',':Attack:825357985030209576'];
-                // foreach ($react_array as $react) {
-                //     $channel->getMessage($message_id)->done(function(Message $roleMsg) use ($react) {
-                //         $roleMsg->react($react);
-                //     }, function($e) {
-                //         echo "Error: {$e->getMessage()}";
-                //     });
-                // }
                 break;
             case '!initregion':
                 $channel = $discord->getChannel('825144851267977256');
