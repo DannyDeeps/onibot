@@ -3,7 +3,7 @@
 use Discord\Discord;
 use Discord\WebSockets\Event;
 use Discord\Parts\Channel\{ Guild, Channel, Message };
-use Discord\Parts\User\Member;
+use Discord\Parts\User\{ Member, User };
 use Discord\Parts\Embed\Embed;
 use Discord\Parts\WebSockets\MessageReaction;
 use React\Http\Message\Response;
@@ -21,11 +21,14 @@ error_reporting(E_ALL);
 $discord = new Discord([
     'token' => 'ODI1MTU0MTc3NzcyMTU5MDM2.YF5ytg.c6tGhN9N4XPDJQnxeXU0An3EtFw',
     'loop' => Factory::create(),
-    'disabledEvents' => []
+    'disabledEvents' => [],
+    'loadAllMembers' => true
 ]);
 
 $discord->on('ready', function(Discord $discord)
 {
+    // echo print_r($discord->users);
+
     // LISTEN FOR COMMANDS
     $discord->on(Event::MESSAGE_CREATE, function (Message $message, Discord $discord)
     {
@@ -134,9 +137,9 @@ $discord->on('ready', function(Discord $discord)
     });
 
     $discord->on(Event::GUILD_MEMBER_ADD, function (Member $member, Discord $discord) {
-        echo print_r($member);
+        echo "USER: " . print_r($member->user->username);
         // $embed= new Embed($discord, [
-        //     'title' => $member->username,
+        //     'title' => $member->user->username,
         //     'description' => 'Another demon joins our army!',
         //     'color' => '#00FF00',
         //     'thumbnail' => $member->user->avatar
