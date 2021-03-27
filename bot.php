@@ -132,7 +132,7 @@ $discord->on('ready', function(Discord $discord)
 
     $discord->on(Event::GUILD_MEMBER_ADD, function (Member $member, Discord $discord) {
         $embed= new Embed($discord, [
-            'title' => $member->user->username,
+            'title' => $member->username,
             'description' => 'Another demon joins our army!',
             'color' => '#00FF00',
             'thumbnail' => $member->user->avatar
