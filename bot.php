@@ -20,7 +20,7 @@ $discord->on('ready', function(Discord $discord)
     {
         switch (strtolower($message->content)) {
             case '!initrole':
-                $content= ">>> \r\nReact to this message to get your classes!\r\n ";
+                $content= file_get_contents('messages/initrole.md');
 
                 $channel = $discord->getChannel('825144851267977256');
                 $promise= $channel->sendMessage($content);
