@@ -75,6 +75,7 @@ $discord->on('ready', function(Discord $discord)
 
     $discord->on(Event::MESSAGE_REACTION_ADD, function(MessageReaction $reaction, Discord $discord)
     {
+        echo print_r($reaction);
         switch ($reaction->emoji->name) {
             case 'Heal':
                 $reaction->member->addRole(Roles::HEAL);
