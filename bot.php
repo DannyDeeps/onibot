@@ -21,10 +21,12 @@ $discord->on('ready', function(Discord $discord)
             case '!initrole':
                 $channel = $discord->getChannel('825144851267977256');
                 $channel->sendMessage('Select a reaction to designate your role!')->done(function(Message $msg) {
-                    $msg->react(':Heal:825145748936589312');
-                    $msg->react(':Tank:825357985030209576');
-                    $msg->react(':Range:825357985030209576');
-                    $msg->react(':Attack:825357985030209576');
+                    $classes= [':Heal:825145748936589312',':Tank:825357985030209576',':Range:825357985030209576',':Attack:825357985030209576'];
+                    $msg->react($classes);
+                    // $msg->react(':Heal:825145748936589312');
+                    // $msg->react(':Tank:825357985030209576');
+                    // $msg->react(':Range:825357985030209576');
+                    // $msg->react(':Attack:825357985030209576');
                 }, function($e) {
                     echo "Error: {$e->getMessage()}";
                 });
