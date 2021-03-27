@@ -3,7 +3,7 @@
 use Discord\Discord;
 use Discord\WebSockets\Event;
 use Discord\Parts\Channel\{ Guild, Channel, Message };
-use Discord\Parts\User\Member
+use Discord\Parts\User\Member;
 use Discord\Parts\Embed\Embed;
 use Discord\Parts\WebSockets\MessageReaction;
 use React\Http\Message\Response;
