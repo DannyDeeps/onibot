@@ -135,16 +135,16 @@ $discord->on('ready', function(Discord $discord)
 
     $discord->on(Event::GUILD_MEMBER_ADD, function (Member $member, Discord $discord) {
         echo print_r($member);
-        $embed= new Embed($discord, [
-            'title' => $member->username,
-            'description' => 'Another demon joins our army!',
-            'color' => '#00FF00',
-            'thumbnail' => $member->user->avatar
-        ]);
-        $channel= $discord->getChannel(Channels::WELCOME);
-        $channel->sendMessage('', false, $embed)->done(null, function($e) {
-            echo "ERROR: {$e->getMessage()}";
-        });
+        // $embed= new Embed($discord, [
+        //     'title' => $member->username,
+        //     'description' => 'Another demon joins our army!',
+        //     'color' => '#00FF00',
+        //     'thumbnail' => $member->user->avatar
+        // ]);
+        // $channel= $discord->getChannel(Channels::WELCOME);
+        // $channel->sendMessage('', false, $embed)->done(null, function($e) {
+        //     echo "ERROR: {$e->getMessage()}";
+        // });
     });
 });
 
