@@ -5,6 +5,7 @@ use Discord\Parts\Channel\{ Guild, Channel, Message };
 use React\EventLoop\Factory;
 use Psr\Http\Message\ResponseInterface;
 use React\Http\Browser;
+use 
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -16,22 +17,31 @@ $discord = new Discord([
     'disabledEvents' => []
 ]);
 
-$discord->on('ready', function(Discord $discord) {
-
-    $discord->on('message', function (Message $message, Discord $discord) {
+$discord->on('ready', function(Discord $discord)
+{
+    $discord->on('message', function (Message $message, Discord $discord)
+    {
         switch (strtolower($message->content)) {
             case '!initrole':
                 $channel = $discord->getChannel('825144851267977256');
-                $channel->sendMessage('Select a reaction to designate your role!')->done(function() {
-                    echo "Message Sent\r\n";
-                }, function($e) {
-                    echo "Error: " . $e->getMessage();
-                });
+                $channel->sendMessage('Select a reaction to designate your role!')->done(success('Role Message Initialised'), error($e, 'Role Message'));
+                break;
+            case '!initregion':
+                $channel = $discord->getChannel('825144851267977256');
+                $channel->sendMessage('Select a reaction to designate your region!')->done(success('Region Message Initialised'), error($e, 'Region Message'));
                 break;
         }
     });
-
 });
+
+function error(String $msg)
+{
+    echo $msg."\r\n";
+}
+function success($e, String $msg)
+{
+    echo $msg . ": " . $e.getMessage();
+}
 
 
 $discord->run();
