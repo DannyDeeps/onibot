@@ -20,11 +20,11 @@ $discord->on('ready', function(Discord $discord)
         switch (strtolower($message->content)) {
             case '!initrole':
                 $channel = $discord->getChannel('825144851267977256');
-                $channel->sendMessage('Select a reaction to designate your role!')->done(success('Role Message Initialised'), error('Role Message'));
+                $channel->sendMessage('Select a reaction to designate your role!')->done('success', 'error');
                 break;
             case '!initregion':
                 $channel = $discord->getChannel('825144851267977256');
-                $channel->sendMessage('Select a reaction to designate your region!')->done(success('Region Message Initialised'), error('Region Message'));
+                $channel->sendMessage('Select a reaction to designate your region!')->done('success', 'error');
                 break;
         }
     });
@@ -32,11 +32,11 @@ $discord->on('ready', function(Discord $discord)
 
 function success(String $msg)
 {
-    echo $msg."\r\n";
+    echo 'Success' . $msg."\r\n";
 }
-function error($e, String $msg)
+function error($e)
 {
-    echo $msg . ": " . $e->getMessage() . "\r\n";
+    echo 'Error: ' . $e->getMessage() . "\r\n";
 }
 
 
