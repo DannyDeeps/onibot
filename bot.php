@@ -3,14 +3,10 @@
 use Discord\Discord;
 use Discord\Parts\Channel\{ Guild, Channel, Message };
 use React\EventLoop\Factory;
-use Psr\Http\Message\ResponseInterface;
-use React\Http\Browser;
-use 
 
 require __DIR__ . '/vendor/autoload.php';
 
 $loop = Factory::create();
-// $browser= new Browser($loop);
 $discord = new Discord([
     'token' => 'ODI1MTU0MTc3NzcyMTU5MDM2.YF5ytg.c6tGhN9N4XPDJQnxeXU0An3EtFw',
     'loop' => $loop,
@@ -40,7 +36,7 @@ function error(String $msg)
 }
 function success($e, String $msg)
 {
-    echo $msg . ": " . $e.getMessage();
+    echo $msg . ": " . $e->getMessage() . "\r\n";
 }
 
 
