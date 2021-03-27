@@ -5,6 +5,7 @@ use Discord\Parts\Channel\{ Guild, Channel, Message };
 use Discord\Parts\Embed\Embed;
 use React\Http\Message\Response;
 use React\EventLoop\Factory;
+use Oni\Reacts;
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -29,16 +30,17 @@ $discord->on('ready', function(Discord $discord)
 
                 $channel = $discord->getChannel('825144851267977256');
                 $promise= $channel->sendMessage('', false, $embed);
-                $react_array= [
-                    'Heal' => ':Heal:825145748936589312',
-                    'Tank' => ':Tank:825152268340953109',
-                    'Range' => ':Range:825150110571954197',
-                    'Attack' => ':Attack:825152209950867467'
-                ];
+                $reacts= [Reacts::HEAL, Reacts::TANK, Reacts::Range, Reacts::ATTACK];
+                // $reacts= [
+                //     'Heal' => ':Heal:825145748936589312',
+                //     'Tank' => ':Tank:825152268340953109',
+                //     'Range' => ':Range:825150110571954197',
+                //     'Attack' => ':Attack:825152209950867467'
+                // ];
                 $results= [];
-                foreach ($react_array as $name => $code) {
-                    $promise->then(function(Message $message) use ($code) {
-                        $results[]= $message->react($code);
+                foreach ($reacts as $react) {
+                    $promise->then(function(Message $message) use ($react) {
+                        $results[]= $message->react($react);
                     }, function($e) {
                         echo "Error: " . $e->getMessage();
                     });
@@ -57,16 +59,15 @@ $discord->on('ready', function(Discord $discord)
 
                 $channel = $discord->getChannel('825144851267977256');
                 $promise= $channel->sendMessage('', false, $embed);
-                $react_array= [
-                    'EU' => ':EU:825357985030209576',
-                    'NA' => ':NA:825357985030209576',
-                    'Range' => ':Range:825150110571954197',
-                    'Attack' => ':Attack:825152209950867467'
-                ];
+                $reacts= [Reacts::EU, Reacts::NA];
+                // $reacts= [
+                //     'EU' => ':EU:825357985030209576',
+                //     'NA' => ':NA:825357985030209576'
+                // ];
                 $results= [];
-                foreach ($react_array as $name => $code) {
-                    $promise->then(function(Message $message) use ($code) {
-                        $results[]= $message->react($code);
+                foreach ($reacts as $react) {
+                    $promise->then(function(Message $message) use ($react) {
+                        $results[]= $message->react($react);
                     }, function($e) {
                         echo "Error: " . $e->getMessage();
                     });

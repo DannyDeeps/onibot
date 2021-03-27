@@ -12,5 +12,10 @@
     "minimum-stability": "stable",
     "require": {
         "team-reflex/discord-php": "^5.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Oni": "src/"
+        }
     }
 }
