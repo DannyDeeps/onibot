@@ -29,7 +29,9 @@ $discord->on('ready', function(Discord $discord)
                 ]);
 
                 $channel = $discord->getChannel('825144851267977256');
-                $promise= $channel->sendMessage('React to this message to get your classes!', false, $embed);
+                $promise= $channel->sendMessage('React to this message to get your classes!', false, $embed)->done(false, function($e){
+                    echo "Error: " . $e->getMessage();
+                });
                 $react_array= [
                     'Heal' => ':Heal:825145748936589312',
                     'Tank' => ':Tank:825152268340953109',
