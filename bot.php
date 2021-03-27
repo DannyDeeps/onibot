@@ -2,6 +2,7 @@
 
 use Discord\Discord;
 use Discord\Parts\Channel\{ Guild, Channel, Message };
+use Discord\Parts\Embed\Embed;
 use React\Http\Message\Response;
 use React\EventLoop\Factory;
 
@@ -20,10 +21,15 @@ $discord->on('ready', function(Discord $discord)
     {
         switch (strtolower($message->content)) {
             case '!initrole':
-                $content= file_get_contents('messages/initrole.md');
+
+                $content= new Embed($discord, [
+                    'title' => 'Classes',
+                    'color' => '00FF00',
+                    'fields' => ['one', 'two', 'three']
+                ]);
 
                 $channel = $discord->getChannel('825144851267977256');
-                $promise= $channel->sendMessage($content);
+                $promise= $channel->sendEmbed($content);
                 $react_array= [
                     'Heal' => ':Heal:825145748936589312',
                     'Tank' => ':Tank:825152268340953109',
