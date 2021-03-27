@@ -20,14 +20,14 @@ $discord->on('ready', function(Discord $discord) {
     $discord->on('message', function (Message $message, Discord $discord) {
         switch (strtolower($message->content)) {
             case '!initrole':
-                $discord->guilds->fetch('ONI')->done(function(Guild $guild) use ($message) {
-                    $content= json_encode($guild);
-                    $message->reply($content);
-
+                $content= json_encode($discord);
+                $message->reply($content);
+                
+                // $discord->guilds->fetch('ONI')->done(function(Guild $guild) use ($message) {
                     // $guild->channels->fetch('roles')->done(function(Channel $channel) {
                     //     die('<pre>'.print_r($channel,true).'</pre>');
                     // });
-                });
+                // });
                 break;
         }
     });
