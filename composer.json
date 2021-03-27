@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Oni": "src/"
+            "Oni\\": "src/"
         }
     }
 }
