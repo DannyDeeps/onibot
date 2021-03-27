@@ -22,6 +22,7 @@ $discord = new Discord([
 
 $discord->on('ready', function(Discord $discord)
 {
+    // LISTEN FOR COMMANDS
     $discord->on(Event::MESSAGE_CREATE, function (Message $message, Discord $discord)
     {
         switch (strtolower($message->content)) {
@@ -74,6 +75,7 @@ $discord->on('ready', function(Discord $discord)
         }
     });
 
+    // LISTEN FOR REACTION ADD IN ROLES CHANNEL
     $discord->on(Event::MESSAGE_REACTION_ADD, function(MessageReaction $reaction, Discord $discord)
     {
         if (!$reaction->member->user->bot && $reaction->channel_id == Channels::ROLES) {
@@ -99,9 +101,11 @@ $discord->on('ready', function(Discord $discord)
             }
         }
     });
+
+    // LISTEN FOR REACTION REMOVE IN ROLES CHANNEL
     $discord->on(Event::MESSAGE_REACTION_REMOVE, function(MessageReaction $reaction, Discord $discord)
     {
-        if (!$reaction->member->user->bot) {
+        if (!$reaction->member->user->bot && $reaction->channel_id == Channels::ROLES) {
             switch ($reaction->emoji->name) {
                 case 'Heal':
                     $reaction->member->removeRole(Roles::HEAL);

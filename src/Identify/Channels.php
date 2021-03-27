@@ -1,6 +1,6 @@
 <?php namespace Oni\Identify;
 
-class Roles
+class Channels
 {
     const
         ROLES   = '825144851267977256',
