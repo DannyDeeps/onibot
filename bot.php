@@ -24,11 +24,12 @@ $discord->on('ready', function(Discord $discord)
 
                 $embed= new Embed($discord, [
                     'title' => 'Classes',
+                    'description' => 'Select the reactions below to be assigned the roles you prefer to play.',
                     'color' => '#00FF00'
                 ]);
 
                 $channel = $discord->getChannel('825144851267977256');
-                $promise= $channel->sendMessage('React to this message to get your classes!', false, $embed);
+                $promise= $channel->sendMessage('', false, $embed);
                 $react_array= [
                     'Heal' => ':Heal:825145748936589312',
                     'Tank' => ':Tank:825152268340953109',
