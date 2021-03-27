@@ -135,8 +135,8 @@ $discord->on('ready', function(Discord $discord)
         $embed= new Embed($discord, [
             'title' => $member->user->username,
             'description' => 'Another demon joins our army!',
-            'color' => '#00FF00',
-            'thumbnail' => $member->user->avatar
+            'color' => '#00FF00'
+            // 'thumbnail' => $member->user->avatar
         ]);
         $channel= $discord->getChannel(Channels::WELCOME);
         $channel->sendMessage('', false, $embed)->done(null, function($e) {
