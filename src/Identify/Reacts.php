@@ -1,4 +1,4 @@
-<?php namespace Oni;
+<?php namespace Oni\Identify;
 
 class Reacts
 {

@@ -1,9 +1,9 @@
-<?php namespace Oni;
+<?php namespace Oni\Identify;
 
 class Roles
 {
     const
-        HEAL  = '825144991898665030',
+        HEAL    = '825144991898665030',
         TANK    = '825146828457639988',
         RANGE   = '825146666482794517',
         ATTACK  = '825146782807097397',
