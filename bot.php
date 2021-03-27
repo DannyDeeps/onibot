@@ -73,6 +73,8 @@ $discord->on('ready', function(Discord $discord)
                     return new Response(200, ['Content-Type' => 'application/json'], json_encode($results));
                 });
                 break;
+            case: '!empty':
+                $message->channel->createMessageCollector()
         }
     });
 
