@@ -30,11 +30,11 @@ $discord->on('ready', function(Discord $discord)
     });
 });
 
-function error(String $msg)
+function success(String $msg)
 {
     echo $msg."\r\n";
 }
-function success($e, String $msg)
+function error($e, String $msg)
 {
     echo $msg . ": " . $e->getMessage() . "\r\n";
 }
