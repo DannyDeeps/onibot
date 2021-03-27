@@ -29,9 +29,7 @@ $discord->on('ready', function(Discord $discord)
                 ]);
 
                 $channel = $discord->getChannel('825144851267977256');
-                $promise= $channel->sendMessage('React to this message to get your classes!', false, $embed)->done(null, function($e){
-                    echo "Error: " . $e->getMessage();
-                });
+                $promise= $channel->sendMessage('React to this message to get your classes!', false, $embed);
                 $react_array= [
                     'Heal' => ':Heal:825145748936589312',
                     'Tank' => ':Tank:825152268340953109',
@@ -42,6 +40,8 @@ $discord->on('ready', function(Discord $discord)
                 foreach ($react_array as $name => $code) {
                     $promise->then(function(Message $message) use ($code) {
                         $results[]= $message->react($code);
+                    }, function($e) {
+                        echo "Error: " . $e->getMessage();
                     });
                 }
 
