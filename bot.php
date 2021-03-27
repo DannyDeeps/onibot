@@ -29,7 +29,7 @@ $discord->on('ready', function(Discord $discord)
                 ]);
 
                 $channel = $discord->getChannel('825144851267977256');
-                $promise= $channel->sendMessage('React to this message to get your classes!', false, $embed)->done(false, function($e){
+                $promise= $channel->sendMessage('React to this message to get your classes!', false, $embed)->done(null, function($e){
                     echo "Error: " . $e->getMessage();
                 });
                 $react_array= [
