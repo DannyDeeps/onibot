@@ -30,13 +30,7 @@ $discord->on('ready', function(Discord $discord)
 
                 $channel = $discord->getChannel('825144851267977256');
                 $promise= $channel->sendMessage('', false, $embed);
-                $reacts= [Reacts::HEAL, Reacts::TANK, Reacts::Range, Reacts::ATTACK];
-                // $reacts= [
-                //     'Heal' => ':Heal:825145748936589312',
-                //     'Tank' => ':Tank:825152268340953109',
-                //     'Range' => ':Range:825150110571954197',
-                //     'Attack' => ':Attack:825152209950867467'
-                // ];
+                $reacts= [Reacts::HEAL, Reacts::TANK, Reacts::RANGE, Reacts::ATTACK];
                 $results= [];
                 foreach ($reacts as $react) {
                     $promise->then(function(Message $message) use ($react) {
@@ -60,10 +54,6 @@ $discord->on('ready', function(Discord $discord)
                 $channel = $discord->getChannel('825144851267977256');
                 $promise= $channel->sendMessage('', false, $embed);
                 $reacts= [Reacts::EU, Reacts::NA];
-                // $reacts= [
-                //     'EU' => ':EU:825357985030209576',
-                //     'NA' => ':NA:825357985030209576'
-                // ];
                 $results= [];
                 foreach ($reacts as $react) {
                     $promise->then(function(Message $message) use ($react) {
