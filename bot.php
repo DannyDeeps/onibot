@@ -20,6 +20,7 @@ $discord->on('ready', function(Discord $discord) use ($browser) {
     $discord->on('message', function (Message $message, Discord $discord) use ($browser) {
         switch (strtolower($message->content)) {
             case '!initrole':
+                $message->reply('boobs');
                 $discord->guilds->fetch('ONI')->done(function(Guild $guild) {
                     $guild->channels->fetch('roles')->done(function(Channel $channel) {
                         die('<pre>'.print_r($channel,true).'</pre>');
