@@ -145,6 +145,8 @@ $discord->on('ready', function(Discord $discord)
         // $channel->sendMessage('', false, $embed)->done(null, function($e) {
         //     echo "ERROR: {$e->getMessage()}";
         // });
+    }, function($e) {
+        echo "ERROR: {$e->getMessage()}";
     });
 });
 
