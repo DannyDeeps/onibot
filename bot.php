@@ -9,7 +9,6 @@ use React\Http\Browser;
 require __DIR__ . '/vendor/autoload.php';
 
 $loop = Factory::create();
-// $browser = new Browser($loop);
 $discord = new Discord([
     'token' => 'ODI1MTU0MTc3NzcyMTU5MDM2.YF5ytg.c6tGhN9N4XPDJQnxeXU0An3EtFw',
     'loop' => $loop,
@@ -22,7 +21,7 @@ $discord->on('ready', function(Discord $discord) {
             case '!initrole':
                 $message = new Message($discord);
                 $message->content= 'Test';
-                $discord->guilds->channels['roles']->reply($message);
+                $discord->guilds->channels->
                 break;
         }
     });
