@@ -40,7 +40,10 @@ $discord->on('ready', function(Discord $discord)
                     }
                     eval($string); //I really hate this language sometimes
                 }, function($e) {
-                    echo "Error: {$e->getMessage()}";
+                    ob_flush();
+                    ob_start();
+                    var_dump($e);
+                    file_put_contents("error.txt", ob_get_flush());
                 });
                 break;
             case '!initregion':
