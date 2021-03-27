@@ -81,7 +81,9 @@ $discord->on('ready', function(Discord $discord)
                 $reaction->member->addRole(Roles::HEAL);
                 break;
             case 'Tank':
-                $reaction->member->addRole(Roles::TANK);
+                $reaction->member->addRole(Roles::TANK)->done(null, function($e) {
+                    echo "ERROR: {$e->getMessage()}";
+                });
                 break;
             case 'Range':
                 $reaction->member->addRole(Roles::RANGE);
@@ -99,6 +101,7 @@ $discord->on('ready', function(Discord $discord)
     });
     $discord->on(Event::MESSAGE_REACTION_REMOVE, function(MessageReaction $reaction, Discord $discord)
     {
+        echo print_r($reaction);
         switch ($reaction->emoji->name) {
             case 'Heal':
                 $reaction->member->removeRole(Roles::HEAL);
