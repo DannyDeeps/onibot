@@ -22,7 +22,11 @@ $discord->on('ready', function(Discord $discord) {
         switch (strtolower($message->content)) {
             case '!initrole':
                 $channel = $discord->getChannel('825144851267977256');
-                $channel->sendMessage('Select a reaction to designate your role!');
+                $channel->sendMessage('Select a reaction to designate your role!')->done(function() {
+                    echo "Message Sent\r\n";
+                }, function($e) {
+                    echo "Error: " . $e->getMessage();
+                });
                 break;
         }
     });
