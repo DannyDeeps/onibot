@@ -8,6 +8,7 @@ use Discord\Parts\WebSockets\MessageReaction;
 use React\Http\Message\Response;
 use React\EventLoop\Factory;
 use Oni\Reacts;
+use Oni\Roles;
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -74,7 +75,49 @@ $discord->on('ready', function(Discord $discord)
 
     $discord->on(Event::MESSAGE_REACTION_ADD, function(MessageReaction $reaction, Discord $discord)
     {
-        echo print_r($reaction, true);
+        switch ($reaction->emoji->name) {
+            case 'Heal':
+                $reaction->member->addRole(Roles::HEAL);
+                break;
+            case 'Tank':
+                $reaction->member->addRole(Roles::TANK);
+                break;
+            case 'Range':
+                $reaction->member->addRole(Roles::RANGE);
+                break;
+            case 'Attack':
+                $reaction->member->addRole(Roles::ATTACK);
+                break;
+            case 'EU':
+                $reaction->member->addRole(Roles::EU);
+                break;
+            case 'NA':
+                $reaction->member->addRole(Roles::NA);
+                break;
+        }
+    });
+    $discord->on(Event::MESSAGE_REACTION_REMOVE, function(MessageReaction $reaction, Discord $discord)
+    {
+        switch ($reaction->emoji->name) {
+            case 'Heal':
+                $reaction->member->removeRole(Roles::HEAL);
+                break;
+            case 'Tank':
+                $reaction->member->removeRole(Roles::TANK);
+                break;
+            case 'Range':
+                $reaction->member->removeRole(Roles::RANGE);
+                break;
+            case 'Attack':
+                $reaction->member->removeRole(Roles::ATTACK);
+                break;
+            case 'EU':
+                $reaction->member->removeRole(Roles::EU);
+                break;
+            case 'NA':
+                $reaction->member->removeRole(Roles::NA);
+                break;
+        }
     });
 });
 
