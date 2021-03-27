@@ -137,7 +137,9 @@ $discord->on('ready', function(Discord $discord)
             'thumbnail' => $member->user->avatar
         ]);
         $channel= $discord->getChannel(Channels::WELCOME);
-        $channel->sendMessage('', false, $embed);
+        $channel->sendMessage('', false, $embed)->done(null, function($e) {
+            echo "ERROR: {$e->getMessage()}";
+        });
     });
 });
 
