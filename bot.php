@@ -22,14 +22,14 @@ $discord->on('ready', function(Discord $discord)
         switch (strtolower($message->content)) {
             case '!initrole':
 
-                $content= new Embed($discord, [
+                $embed= new Embed($discord, [
                     'title' => 'Classes',
                     'color' => '00FF00',
                     'fields' => ['one', 'two', 'three']
                 ]);
 
                 $channel = $discord->getChannel('825144851267977256');
-                $promise= $channel->sendEmbed($content);
+                $promise= $channel->sendMessage('React to this message to get your classes!', false, $embed);
                 $react_array= [
                     'Heal' => ':Heal:825145748936589312',
                     'Tank' => ':Tank:825152268340953109',
