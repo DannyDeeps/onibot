@@ -21,11 +21,8 @@ $discord->on('ready', function(Discord $discord) {
     $discord->on('message', function (Message $message, Discord $discord) {
         switch (strtolower($message->content)) {
             case '!initrole':
-                $selectRoleMsg= new Message($discord, [
-                    'channel_id' => '825144851267977256',
-                    'content' => 'Select a reaction to designate your role.'
-                ]);
-                $selectRoleMsg->reply($selectRoleMsg->content);
+                $channel = $discord->getChannel('825144851267977256');
+                $channel->sendMessage('Select a reaction to designate your role!');
                 break;
         }
     });
