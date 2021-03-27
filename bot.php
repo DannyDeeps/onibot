@@ -21,18 +21,11 @@ $discord->on('ready', function(Discord $discord) {
     $discord->on('message', function (Message $message, Discord $discord) {
         switch (strtolower($message->content)) {
             case '!initrole':
-                // $initRoleMessage= new Message($discord, [
-                //     'content' => 'Select a reaction below to designate your playstyle!'
-                // ]);
-                $attrs= $message->getRawAttributes();
-                $content= json_encode($attrs);
-                $message->reply($content);
-
-                // $discord->guilds->fetch('ONI')->done(function(Guild $guild) use ($message) {
-                    // $guild->channels->fetch('roles')->done(function(Channel $channel) {
-                    //     die('<pre>'.print_r($channel,true).'</pre>');
-                    // });
-                // });
+                $selectRoleMsg= new Message($discord, [
+                    'channel_id' => '12345',
+                    'content' => 'Select a reaction to designate your role.'
+                ]);
+                $selectRoleMsg->reply($selectRoleMsg->content);
                 break;
         }
     });
