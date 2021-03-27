@@ -21,7 +21,8 @@ $discord->on('ready', function(Discord $discord) {
             case '!initrole':
                 $message = new Message($discord);
                 $message->content= 'Test';
-                $discord->guilds->channels->
+
+                die('<pre>'.print_r($discord,true).'</pre>');
                 break;
         }
     });
