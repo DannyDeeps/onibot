@@ -24,8 +24,7 @@ $discord->on('ready', function(Discord $discord)
 
                 $embed= new Embed($discord, [
                     'title' => 'Classes',
-                    'color' => '00FF00',
-                    'fields' => ['one', 'two', 'three']
+                    'color' => '#00FF00'
                 ]);
 
                 $channel = $discord->getChannel('825144851267977256');
