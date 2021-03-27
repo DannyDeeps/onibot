@@ -17,12 +17,13 @@ $discord = new Discord([
 ]);
 
 $discord->on('ready', function(Discord $discord) {
+
     $discord->on('message', function (Message $message, Discord $discord) {
         switch (strtolower($message->content)) {
             case '!initrole':
-                $content= json_encode($discord);
+                $content= json_encode($message);
                 $message->reply($content);
-                
+
                 // $discord->guilds->fetch('ONI')->done(function(Guild $guild) use ($message) {
                     // $guild->channels->fetch('roles')->done(function(Channel $channel) {
                     //     die('<pre>'.print_r($channel,true).'</pre>');
@@ -31,6 +32,7 @@ $discord->on('ready', function(Discord $discord) {
                 break;
         }
     });
+
 });
 
 
