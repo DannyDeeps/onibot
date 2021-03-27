@@ -26,7 +26,9 @@ $discord->on('ready', function(Discord $discord) {
                 });
                 break;
             case '!initrole':
-                new Message();
+                $message = new Message($discord);
+                $message->content= 'Test';
+                $discord->guilds->channels['roles']->reply($message);
                 break;
         }
     });
