@@ -136,8 +136,8 @@ $discord->on('ready', function(Discord $discord)
             'title' => $member->user->username,
             'description' => 'Another demon joins our army!',
             'color' => '#00FF00',
-            'image' => [
-                'url' => $member->user->avater
+            'thumbnail' => [
+                'url' => $member->user->avatar,
             ]
         ]);
         $channel= $discord->getChannel(Channels::WELCOME);
