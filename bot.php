@@ -1,8 +1,10 @@
 <?php
 
 use Discord\Discord;
+use Discord\WebSockets\Event;
 use Discord\Parts\Channel\{ Guild, Channel, Message };
 use Discord\Parts\Embed\Embed;
+use Discord\Parts\WebSockets\MessageReaction;
 use React\Http\Message\Response;
 use React\EventLoop\Factory;
 use Oni\Reacts;
@@ -18,10 +20,12 @@ $discord = new Discord([
 
 $discord->on('ready', function(Discord $discord)
 {
-    $discord->on('message', function (Message $message, Discord $discord)
+    $discord->on(Event::MESSAGE_CREATE, function (Message $message, Discord $discord)
     {
         switch (strtolower($message->content)) {
             case '!initrole':
+                $results= [];
+                $reacts= [Reacts::HEAL, Reacts::TANK, Reacts::RANGE, Reacts::ATTACK];
                 $embed= new Embed($discord, [
                     'title' => 'Classes',
                     'description' => 'Select the reactions below to be assigned the roles you prefer to play.',
@@ -30,8 +34,6 @@ $discord->on('ready', function(Discord $discord)
 
                 $channel = $discord->getChannel('825144851267977256');
                 $promise= $channel->sendMessage('', false, $embed);
-                $reacts= [Reacts::HEAL, Reacts::TANK, Reacts::RANGE, Reacts::ATTACK];
-                $results= [];
                 foreach ($reacts as $react) {
                     $promise->then(function(Message $message) use ($react) {
                         $results[]= $message->react($react);
@@ -45,6 +47,8 @@ $discord->on('ready', function(Discord $discord)
                 });
                 break;
             case '!initregion':
+                $results= [];
+                $reacts= [Reacts::EU, Reacts::NA];
                 $embed= new Embed($discord, [
                     'title' => 'Region',
                     'description' => 'Select the reactions below to be assigned the region you prefer to play on.',
@@ -53,8 +57,6 @@ $discord->on('ready', function(Discord $discord)
 
                 $channel = $discord->getChannel('825144851267977256');
                 $promise= $channel->sendMessage('', false, $embed);
-                $reacts= [Reacts::EU, Reacts::NA];
-                $results= [];
                 foreach ($reacts as $react) {
                     $promise->then(function(Message $message) use ($react) {
                         $results[]= $message->react($react);
@@ -68,6 +70,11 @@ $discord->on('ready', function(Discord $discord)
                 });
                 break;
         }
+    });
+
+    $discord->on(Event::MESSAGE_REACTION_ADD, function(MessageReaction $reaction, Discord $discord)
+    {
+        echo print_r($reaction, true);
     });
 });
 
