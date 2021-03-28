@@ -132,19 +132,21 @@ $discord->on('ready', function(Discord $discord)
 
     $discord->on(Event::GUILD_MEMBER_ADD, function (Member $member, Discord $discord)
     {
-        $embed= new Embed($discord, [
-            'title' => $member->user->username,
-            'description' => 'Another demon joins our army!',
-            'color' => '#00FF00',
-            'thumbnail' => [
-                'url' => $member->user->avatar,
-                'width' => 32,
-                'height' => 32
-            ]
-        ]);
-        $channel= $discord->getChannel(Channels::WELCOME);
-        $channel->sendMessage('', false, $embed)->done(null, function($e) {
-            echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]";
+        $member->addRole(Roles::YOKAI)->done(function() use ($discord, $member) {
+            $embed= new Embed($discord, [
+                'title' => $member->user->username,
+                'description' => 'Another demon joins our army!',
+                'color' => '#00FF00',
+                'thumbnail' => [
+                    'url' => $member->user->avatar,
+                    'width' => 32,
+                    'height' => 32
+                ]
+            ]);
+            $channel= $discord->getChannel(Channels::WELCOME);
+            $channel->sendMessage('', false, $embed)->done(null, function($e) {
+                echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]";
+            });
         });
     }, function($e) {
         echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n";
