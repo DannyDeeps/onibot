@@ -11,11 +11,15 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "team-reflex/discord-php": "^5.1"
+        "team-reflex/discord-php": "^5.1",
+        "php-activerecord/php-activerecord": "^1.2"
     },
     "autoload": {
         "psr-4": {
             "Oni\\": "src/"
         }
+    },
+    "require-dev": {
+        "kint-php/kint": "^3.3"
     }
 }
