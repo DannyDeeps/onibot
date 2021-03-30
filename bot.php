@@ -81,7 +81,7 @@
                         foreach ($feedData->channel->item as $item) {
                             $embed= new Embed($discord, [
                                 'title' => $item->title,
-                                'description' => $item->description,
+                                'description' => substr(html_entity_decode($item->description), 0, 2048),
                                 'url' => $item->link,
                                 'footer' => [
                                     'text' => 'Author: ' . ucwords($item->author) . ' @ ' . date('F j, Y, g:i a', strtotime($item->pubDate))

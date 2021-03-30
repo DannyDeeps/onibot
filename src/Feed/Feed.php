@@ -4,6 +4,6 @@
     {
         public static function get(String $feedUrl)
         {
-            return \simplexml_load_file($feedUrl);
+            return simplexml_load_file($feedUrl);
         }
     }
