@@ -81,11 +81,11 @@
                         $feedData= FeedData::get($feed->feed_url);
                         foreach ($feedData->channel->item as $item) {
                             $embed= new Embed($discord, [
-                                'title' => $item->title,
-                                'description' => substr(html_entity_decode($item->description), 0, 2048),
-                                'url' => $item->link,
+                                'title' => $item->title->title,
+                                'description' => substr(html_entity_decode($item->description->description), 0, 2045) . '...',
+                                'url' => $item->link->link,
                                 'footer' => [
-                                    'text' => 'Author: ' . ucwords($item->author) . ' @ ' . date('F j, Y, g:i a', strtotime($item->pubDate))
+                                    'text' => 'Author: ' . ucwords($item->author->author) . ' @ ' . date('F j, Y, g:i a', strtotime($item->pubDate->pubDate))
                                 ]
                             ]);
                             echo print_r($embed, true);
