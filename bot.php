@@ -43,7 +43,7 @@
                         $promise->then(function(Message $message) use ($react) {
                             $results[]= $message->react($react);
                         }, function($e) {
-                            echo "Error: " . $e->getMessage();
+                            echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n";
                         });
                     }
 
@@ -66,7 +66,7 @@
                         $promise->then(function(Message $message) use ($react) {
                             $results[]= $message->react($react);
                         }, function($e) {
-                            echo "Error: " . $e->getMessage();
+                            echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n";
                         });
                     }
 
@@ -76,8 +76,10 @@
                     break;
                 case '!updatenews':
                     $feeds= Feed::all();
+                    $channel= $discord->getChannel(Channels::NTBSS);
                     foreach ($feeds as $feed) {
                         $feedData= FeedData::get($feed->feed_url);
+                        echo print_r($feedData);
                         foreach ($feedData->channel->item as $item) {
                             $embed= new Embed($discord, [
                                 'title' => $item->title,
@@ -87,9 +89,8 @@
                                     'text' => 'Author: ' . ucwords($item->author) . ' @ ' . date('F j, Y, g:i a', strtotime($item->pubDate))
                                 ]
                             ]);
-                            $channel= $discord->getChannel(Channels::NTBSS);
                             $channel->sendEmbed($embed)->done(null, function($e) {
-                                echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]";
+                                echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n";
                             });
                         }
                     }
@@ -165,7 +166,7 @@
                 ]);
                 $channel= $discord->getChannel(Channels::WELCOME);
                 $channel->sendMessage('', false, $embed)->done(null, function($e) {
-                    echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]";
+                    echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n";
                 });
             });
         }, function($e) {
@@ -187,7 +188,7 @@
                     ]);
                     $channel= $discord->getChannel(Channels::NTBSS);
                     $channel->sendEmbed($embed)->done(null, function($e) {
-                        echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]";
+                        echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n";
                     });
                 }
             }
