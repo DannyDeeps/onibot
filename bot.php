@@ -79,7 +79,6 @@
                     $channel= $discord->getChannel(Channels::NTBSS);
                     foreach ($feeds as $feed) {
                         $feedData= FeedData::get($feed->feed_url);
-                        echo print_r($feedData);
                         foreach ($feedData->channel->item as $item) {
                             $embed= new Embed($discord, [
                                 'title' => $item->title,
@@ -89,6 +88,7 @@
                                     'text' => 'Author: ' . ucwords($item->author) . ' @ ' . date('F j, Y, g:i a', strtotime($item->pubDate))
                                 ]
                             ]);
+                            echo print_r($embed, true);
                             $channel->sendEmbed($embed)->done(null, function($e) {
                                 echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n";
                             });
