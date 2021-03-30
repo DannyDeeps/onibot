@@ -74,11 +74,12 @@
                         return new Response(200, ['Content-Type' => 'application/json'], json_encode($results));
                     });
                     break;
-                case '!updatenews':
+                    case '!updatenews':
+                    $feeds= Feed::all();
+                    echo print_r();
                     try {
-                        $feeds= Feed::all();
                         foreach ($feeds as $feed) {
-                            $feedData= FeedData::get($feed->url);
+                            $feedData= FeedData::get($feed->feed_url);
                             foreach ($feedData->channel->item as $item) {
                                 $embed= new Embed($discord, [
                                     'title' => $item->title,
