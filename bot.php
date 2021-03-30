@@ -75,23 +75,27 @@
                     });
                     break;
                 case '!updatenews':
-                    $feeds= Feed::all();
-                    foreach ($feeds as $feed) {
-                        $feedData= FeedData::get($feed->url);
-                        foreach ($feedData->channel->item as $item) {
-                            $embed= new Embed($discord, [
-                                'title' => $item->title,
-                                'description' => $item->description,
-                                'url' => $item->link,
-                                'footer' => [
-                                    'text' => 'Author: ' . ucwords($item->author) . ' @ ' . date('F j, Y, g:i a', strtotime($item->pubDate))
-                                ]
-                            ]);
-                            $channel= $discord->getChannel(Channels::NTBSS);
-                            $channel->sendEmbed($embed)->done(null, function($e) {
-                                echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]";
-                            });
+                    try {
+                        $feeds= Feed::all();
+                        foreach ($feeds as $feed) {
+                            $feedData= FeedData::get($feed->url);
+                            foreach ($feedData->channel->item as $item) {
+                                $embed= new Embed($discord, [
+                                    'title' => $item->title,
+                                    'description' => $item->description,
+                                    'url' => $item->link,
+                                    'footer' => [
+                                        'text' => 'Author: ' . ucwords($item->author) . ' @ ' . date('F j, Y, g:i a', strtotime($item->pubDate))
+                                    ]
+                                ]);
+                                $channel= $discord->getChannel(Channels::NTBSS);
+                                $channel->sendEmbed($embed)->done(null, function($e) {
+                                    echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]";
+                                });
+                            }
                         }
+                    } catch (\Throwable $e) {
+                        echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]";
                     }
             }
         });
