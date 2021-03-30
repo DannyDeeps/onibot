@@ -82,9 +82,9 @@
                         echo "<pre>".print_r($feedData, true)."<pre>";
                         foreach ($feedData->channel->item as $item) {
                             $embed= new Embed($discord, [
-                                'title' => $item->title[0]->title,
+                                'title' => (string) $item->title,
                                 // 'description' => substr(html_entity_decode($item->description->description), 0, 2045) . '...',
-                                'url' => $item->link[0]->link,
+                                'url' => (string) $item->link,
                                 'footer' => [
                                     'text' => 'Author: ' . ucwords($item->author) . ' @ ' . date('F j, Y, g:i a', strtotime($item->pubDate))
                                 ]
