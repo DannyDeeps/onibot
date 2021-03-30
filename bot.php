@@ -74,29 +74,24 @@
                         return new Response(200, ['Content-Type' => 'application/json'], json_encode($results));
                     });
                     break;
-                    case '!updatenews':
+                case '!updatenews':
                     $feeds= Feed::all();
-                    echo print_r();
-                    try {
-                        foreach ($feeds as $feed) {
-                            $feedData= FeedData::get($feed->feed_url);
-                            foreach ($feedData->channel->item as $item) {
-                                $embed= new Embed($discord, [
-                                    'title' => $item->title,
-                                    'description' => $item->description,
-                                    'url' => $item->link,
-                                    'footer' => [
-                                        'text' => 'Author: ' . ucwords($item->author) . ' @ ' . date('F j, Y, g:i a', strtotime($item->pubDate))
-                                    ]
-                                ]);
-                                $channel= $discord->getChannel(Channels::NTBSS);
-                                $channel->sendEmbed($embed)->done(null, function($e) {
-                                    echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]";
-                                });
-                            }
+                    foreach ($feeds as $feed) {
+                        $feedData= FeedData::get($feed->feed_url);
+                        foreach ($feedData->channel->item as $item) {
+                            $embed= new Embed($discord, [
+                                'title' => $item->title,
+                                'description' => $item->description,
+                                'url' => $item->link,
+                                'footer' => [
+                                    'text' => 'Author: ' . ucwords($item->author) . ' @ ' . date('F j, Y, g:i a', strtotime($item->pubDate))
+                                ]
+                            ]);
+                            $channel= $discord->getChannel(Channels::NTBSS);
+                            $channel->sendEmbed($embed)->done(null, function($e) {
+                                echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]";
+                            });
                         }
-                    } catch (\Throwable $e) {
-                        echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]";
                     }
             }
         });
