@@ -55,19 +55,21 @@
                 case '!initregion':
                     $results= [];
                     $reacts= [Reacts::EU, Reacts::NA];
-                    $fieldOne= new Field($discord, [
-                        'name' => 'field',
-                        'value' => 'one'
+                    $fieldEU= new Field($discord, [
+                        'name' => 'EU',
+                        'value' => 'Rinnegan',
+                        'inline' => true
                     ]);
-                    $fieldTwo= new Field($discord, [
-                        'name' => 'field',
-                        'value' => 'two'
+                    $fieldNA= new Field($discord, [
+                        'name' => 'NA',
+                        'value' => 'Sharingan',
+                        'inline' => true
                     ]);
                     $embed= new Embed($discord, [
                         'title' => 'Region',
-                        'description' => 'Select the reactions below to be assigned the region you prefer to play on.',
+                        'description' => 'Select the reaction below for your local region.',
                         'color' => '#00FF00',
-                        'fields' => [$fieldOne, $fieldTwo]
+                        'fields' => [$fieldEU, $fieldNA]
                     ]);
 
                     $channel = $discord->getChannel('825144851267977256');
