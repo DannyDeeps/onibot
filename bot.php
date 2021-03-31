@@ -96,7 +96,8 @@
                         }
                     }
                 case '!addnick':
-                    $message->author->setNickname("\u{1F1EA}\u{1F1FA}" . $message->author->username)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                    // $message->author->setNickname("\u{1F1EA}\u{1F1FA}" . $message->author->username)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                    $message->author->setNickname(":flag_eu:" . $message->author->username)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
             }
         });
 
