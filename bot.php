@@ -88,23 +88,28 @@
                     break;
                 case '!updatenews':
                     $feeds= Feed::all();
-                    $channel= $discord->getChannel(Channels::NTBSS);
                     foreach ($feeds as $feed) {
-                        $feedData= FeedData::get($feed->feed_url);
-                        echo "<pre>".print_r($feedData, true)."<pre>";
+                        $feedData= FeedData::get($feed->url);
                         foreach ($feedData->channel->item as $item) {
-                            $embed= new Embed($discord, [
-                                'title' => (string) $item->title,
-                                // 'description' => substr(html_entity_decode($item->description->description), 0, 2045) . '...',
-                                'url' => (string) $item->link,
-                                'footer' => [
-                                    'text' => 'Author: ' . ucwords($item->author) . ' @ ' . date('F j, Y, g:i a', strtotime($item->pubDate))
-                                ]
-                            ]);
-                            echo print_r($embed, true);
-                            $channel->sendEmbed($embed)->done(null, function($e) {
-                                echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n";
-                            });
+                            $newsDate= date('YmdHis', strtotime($item->pubDate));
+                            if ($newsDate > $feed->updated) {
+                                $embed= new Embed($discord, [
+                                    'title' => $item->title,
+                                    'description' => $item->description,
+                                    'url' => $item->link,
+                                    'footer' => [
+                                        'text' => 'Author: ' . ucwords($item->author) . ' @ ' . date('F j, Y, g:i a', strtotime($item->pubDate))
+                                    ]
+                                ]);
+                                $channel= $discord->getChannel(Channels::NTBSS);
+                                $channel->sendEmbed($embed)->done(
+                                    function() use ($item) {
+                                        echo "New News: {$item->title} | Line [".__LINE__."]\r\n";
+                                    }, function($e) {
+                                        echo "New News: {$e->getMessage()} | Line [".__LINE__."]\r\n";
+                                    }
+                                );
+                            }
                         }
                     }
             }
@@ -260,26 +265,33 @@
             });
         });
 
-        // $discord->getLoop()->addPeriodicTimer(3600, function($unknown) use ($discord) {
-        //     $feeds= Feed::all();
-        //     foreach ($feeds as $feed) {
-        //         $feedData= FeedData::get($feed->url);
-        //         foreach ($feedData->channel->item as $item) {
-        //             $embed= new Embed($discord, [
-        //                 'title' => $item->title,
-        //                 'description' => $item->description,
-        //                 'url' => $item->link,
-        //                 'footer' => [
-        //                     'text' => 'Author: ' . ucwords($item->author) . ' @ ' . date('F j, Y, g:i a', strtotime($item->pubDate))
-        //                 ]
-        //             ]);
-        //             $channel= $discord->getChannel(Channels::NTBSS);
-        //             $channel->sendEmbed($embed)->done(null, function($e) {
-        //                 echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n";
-        //             });
-        //         }
-        //     }
-        // });
+        $discord->getLoop()->addPeriodicTimer(43200, function($unknown) use ($discord) {
+            $feeds= Feed::all();
+            foreach ($feeds as $feed) {
+                $feedData= FeedData::get($feed->url);
+                foreach ($feedData->channel->item as $item) {
+                    $newsDate= date('YmdHis', strtotime($item->pubDate));
+                    if ($newsDate > $feed->updated) {
+                        $embed= new Embed($discord, [
+                            'title' => $item->title,
+                            'description' => $item->description,
+                            'url' => $item->link,
+                            'footer' => [
+                                'text' => 'Author: ' . ucwords($item->author) . ' @ ' . date('F j, Y, g:i a', strtotime($item->pubDate))
+                            ]
+                        ]);
+                        $channel= $discord->getChannel(Channels::NTBSS);
+                        $channel->sendEmbed($embed)->done(
+                            function() use ($item) {
+                                echo "New News: {$item->title} | Line [".__LINE__."]\r\n";
+                            }, function($e) {
+                                echo "New News: {$e->getMessage()} | Line [".__LINE__."]\r\n";
+                            }
+                        );
+                    }
+                }
+            }
+        });
     });
 
     $discord->run();
