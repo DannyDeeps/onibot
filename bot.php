@@ -94,9 +94,9 @@
                             $newsDate= date('YmdHis', strtotime($item->pubDate));
                             if ($newsDate > $feed->updated) {
                                 $embed= new Embed($discord, [
-                                    'title' => $item->title,
+                                    'title' => (String) $item->title,
                                     // 'description' => $item->description,
-                                    'url' => $item->link,
+                                    'url' => (String) $item->link,
                                     'footer' => [
                                         'text' => 'Author: ' . ucwords($item->author) . ' @ ' . date('F j, Y, g:i a', strtotime($item->pubDate))
                                     ]
