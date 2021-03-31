@@ -53,7 +53,7 @@
                     });
                     break;
                 case '!initregion':
-                    $reacts= [Reacts::EU, Reacts::NA];
+                    $reacts= [Reacts::NA, Reacts::EU];
                     $fieldEU= new Field($discord, [
                         'name' => 'EU',
                         'value' => 'Rinnegan',
@@ -120,7 +120,7 @@
                                     }
                                 );
                             } else {
-                                echo "Old Article: " . $item->title;
+                                echo "Old Article: " . $item->title . "\r\n";
                             }
                         }
                     }
@@ -283,16 +283,26 @@
         });
 
         $discord->getLoop()->addPeriodicTimer(43200, function($unknown) use ($discord) {
+            $newUpdated= false;
             $feeds= Feed::all();
             foreach ($feeds as $feed) {
-                $feedData= FeedData::get($feed->url);
+                $feedData= FeedData::get($feed->feed_url);
                 foreach ($feedData->channel->item as $item) {
-                    $newsDate= date('YmdHis', strtotime($item->pubDate));
-                    if ($newsDate > $feed->updated) {
+                    $articleDate= date('YmdHis', strtotime($item->pubDate));
+                    echo print_r([
+                        'title' => (String) $item->title,
+                        'link' => (String) $item->link,
+                        'pubDate' => $articleDate,
+                        'feedUpdated' => $feed->updated
+                    ], true);
+                    if ($articleDate > $feed->updated) {
+                        if ($articleDate > $newUpdated) {
+                            $newUpdated= $articleDate;
+                        }
                         $embed= new Embed($discord, [
-                            'title' => $item->title,
-                            'description' => $item->description,
-                            'url' => $item->link,
+                            'title' => (String) $item->title,
+                            // 'description' => $item->description,
+                            'url' => (String) $item->link,
                             'footer' => [
                                 'text' => 'Author: ' . ucwords($item->author) . ' @ ' . date('F j, Y, g:i a', strtotime($item->pubDate))
                             ]
@@ -300,13 +310,20 @@
                         $channel= $discord->getChannel(Channels::NTBSS);
                         $channel->sendEmbed($embed)->done(
                             function() use ($item) {
-                                echo "New News: {$item->title} | Line [".__LINE__."]\r\n";
+                                echo "New Article: {$item->title} | Line [".__LINE__."]\r\n";
                             }, function($e) {
-                                echo "New News: {$e->getMessage()} | Line [".__LINE__."]\r\n";
+                                echo "New Article: {$e->getMessage()} | Line [".__LINE__."]\r\n";
                             }
                         );
+                    } else {
+                        echo "Old Article: " . $item->title . "\r\n";
                     }
                 }
+            }
+            if (!empty($newUpdated)) {
+                $feedUpdate= Feed::find($feed->feed_id);
+                $feedUpdate->updated= $newUpdated;
+                $feedUpdate->save();
             }
         });
     });
