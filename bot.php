@@ -4,10 +4,9 @@
 
     use Discord\Discord;
     use Discord\WebSockets\Event;
-    use Discord\Parts\Channel\{ Guild, Channel, Message };
-    use Discord\Parts\User\{ Member, User };
+    use Discord\Parts\Channel\Message;
+    use Discord\Parts\User\Member;
     use Discord\Parts\Embed\Embed;
-    use Discord\Parts\Guild\Emoji;
     use Discord\Parts\WebSockets\MessageReaction;
     use React\Http\Message\Response;
     use React\EventLoop\Factory;
@@ -15,6 +14,7 @@
     use Oni\Identify\Roles;
     use Oni\Identify\Channels;
     use Oni\Feed\Feed as FeedData;
+    use Discord\Parts\Embed\Field;
 
     $discord = new Discord([
         'token' => 'ODI1MTU0MTc3NzcyMTU5MDM2.YF5ytg.c6tGhN9N4XPDJQnxeXU0An3EtFw',
@@ -55,10 +55,19 @@
                 case '!initregion':
                     $results= [];
                     $reacts= [Reacts::EU, Reacts::NA];
+                    $fieldOne= new Field($discord, [
+                        'name' => 'field',
+                        'value' => 'one'
+                    ]);
+                    $fieldTwo= new Field($discord, [
+                        'name' => 'field',
+                        'value' => 'two'
+                    ]);
                     $embed= new Embed($discord, [
                         'title' => 'Region',
                         'description' => 'Select the reactions below to be assigned the region you prefer to play on.',
-                        'color' => '#00FF00'
+                        'color' => '#00FF00',
+                        'fields' => [$fieldOne, $fieldTwo]
                     ]);
 
                     $channel = $discord->getChannel('825144851267977256');
@@ -98,7 +107,8 @@
                     }
                 case '!addnick':
                     // $message->author->setNickname("\u{1F1EA}\u{1F1FA}" . $message->author->username)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
-                    $message->author->setNickname("\xf0\x9f\x87\xaa\xf0\x9f\x87\xba " . $message->author->username)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                    $message->author->setNickname("\u{1F1FA}\u{1F1F8}|" . $message->author->username)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                    $message->author->setNickname("\u{1F1EA}\u{1F1FA}|" . $message->author->username)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
             }
         });
 
