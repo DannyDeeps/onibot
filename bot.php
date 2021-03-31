@@ -116,10 +116,12 @@
                         $reaction->member->addRole(Roles::ATTACK)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
                         break;
                     case 'EU':
-                        $reaction->member->addRole(Roles::EU)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                        $reaction->member->setNickname(':flag_eu:'.$reaction->member->username)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                        // $reaction->member->addRole(Roles::EU)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
                         break;
                     case 'NA':
-                        $reaction->member->addRole(Roles::NA)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                        $reaction->member->setNickname(':flag_us:'.$reaction->member->username)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                        // $reaction->member->addRole(Roles::NA)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
                         break;
                 }
             }
@@ -143,10 +145,12 @@
                         $reaction->member->removeRole(Roles::ATTACK)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
                         break;
                     case 'EU':
-                        $reaction->member->removeRole(Roles::EU)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                        $reaction->member->setNickname('')->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                        // $reaction->member->removeRole(Roles::EU)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
                         break;
                     case 'NA':
-                        $reaction->member->removeRole(Roles::NA)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                        $reaction->member->setNickname('')->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                        // $reaction->member->removeRole(Roles::NA)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
                         break;
                 }
             }
