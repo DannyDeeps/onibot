@@ -68,7 +68,7 @@
                         'title' => 'Region',
                         'description' => 'Select the reaction below for your local region.',
                         'color' => '#00FF00',
-                        'fields' => [$fieldEU, $fieldNA]
+                        'fields' => [$fieldNA, $fieldEU]
                     ]);
 
                     $results= [];
