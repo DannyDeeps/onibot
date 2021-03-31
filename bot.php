@@ -7,6 +7,7 @@
     use Discord\Parts\Channel\{ Guild, Channel, Message };
     use Discord\Parts\User\{ Member, User };
     use Discord\Parts\Embed\Embed;
+    use Discord\Parts\Guild\Emoji;
     use Discord\Parts\WebSockets\MessageReaction;
     use React\Http\Message\Response;
     use React\EventLoop\Factory;
@@ -97,7 +98,7 @@
                     }
                 case '!addnick':
                     // $message->author->setNickname("\u{1F1EA}\u{1F1FA}" . $message->author->username)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
-                    $message->author->setNickname(":flag_eu:" . $message->author->username)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                    $message->author->setNickname("\xf0\x9f\x87\xaa\xf0\x9f\x87\xba " . $message->author->username)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
             }
         });
 
