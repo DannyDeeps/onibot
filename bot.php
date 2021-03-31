@@ -91,12 +91,12 @@
                     foreach ($feeds as $feed) {
                         $feedData= FeedData::get($feed->feed_url);
                         foreach ($feedData->channel->item as $item) {
-                            $newsDate= date('YmdHis', strtotime($item->pubDate));
+                            $articleDate= date('YmdHis', strtotime($item->pubDate));
                             echo print_r([
-                                'title' => $item->title,
-                                'link' => $item->link,
-                                'pubDate' => $item->pubDate,
-                                'feedUpdated' => $newsDate
+                                'title' => (String) $item->title,
+                                'link' => (String) $item->link,
+                                'pubDate' => $articleDate,
+                                'feedUpdated' => $feed->updated
                             ], true);
                             // if ($newsDate > $feed->updated) {
                             //     $embed= new Embed($discord, [
