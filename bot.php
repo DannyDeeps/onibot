@@ -53,7 +53,6 @@
                     });
                     break;
                 case '!initregion':
-                    $results= [];
                     $reacts= [Reacts::EU, Reacts::NA];
                     $fieldEU= new Field($discord, [
                         'name' => 'EU',
@@ -72,7 +71,8 @@
                         'fields' => [$fieldEU, $fieldNA]
                     ]);
 
-                    $channel = $discord->getChannel('825144851267977256');
+                    $results= [];
+                    $channel = $discord->getChannel(Channels::ROLES);
                     $promise= $channel->sendMessage('', false, $embed);
                     foreach ($reacts as $react) {
                         $promise->then(function(Message $message) use ($react) {
@@ -107,10 +107,6 @@
                             });
                         }
                     }
-                case '!addnick':
-                    // $message->author->setNickname("\u{1F1EA}\u{1F1FA}" . $message->author->username)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
-                    $message->author->setNickname("\u{1F1FA}\u{1F1F8}|" . $message->author->username)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
-                    $message->author->setNickname("\u{1F1EA}\u{1F1FA}|" . $message->author->username)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
             }
         });
 
@@ -120,24 +116,22 @@
             if (!$reaction->member->user->bot && $reaction->channel_id == Channels::ROLES) {
                 switch ($reaction->emoji->name) {
                     case 'Heal':
-                        $reaction->member->addRole(Roles::HEAL)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                        $reaction->member->addRole(Roles::HEAL)->done(null, function($e) { echo "Add Heal: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
                         break;
                     case 'Tank':
-                        $reaction->member->addRole(Roles::TANK)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                        $reaction->member->addRole(Roles::TANK)->done(null, function($e) { echo "Add Tank: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
                         break;
                     case 'Range':
-                        $reaction->member->addRole(Roles::RANGE)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                        $reaction->member->addRole(Roles::RANGE)->done(null, function($e) { echo "Add Range: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
                         break;
                     case 'Attack':
-                        $reaction->member->addRole(Roles::ATTACK)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                        $reaction->member->addRole(Roles::ATTACK)->done(null, function($e) { echo "Add Attack: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
                         break;
                     case 'EU':
-                        $reaction->member->setNickname(':flag_eu:'.$reaction->member->username)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
-                        // $reaction->member->addRole(Roles::EU)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                        $reaction->member->setNickname("\u{1F1EA}\u{1F1FA}|" . $reaction->member->username)->done(null, function($e) { echo "Add EU: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
                         break;
                     case 'NA':
-                        $reaction->member->setNickname(':flag_us:'.$reaction->member->username)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
-                        // $reaction->member->addRole(Roles::NA)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                        $reaction->member->setNickname("\u{1F1FA}\u{1F1F8}|" . $reaction->member->username)->done(null, function($e) { echo "Add NA: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
                         break;
                 }
             }
@@ -149,24 +143,22 @@
             if (!$reaction->member->user->bot && $reaction->channel_id == Channels::ROLES) {
                 switch ($reaction->emoji->name) {
                     case 'Heal':
-                        $reaction->member->removeRole(Roles::HEAL)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                        $reaction->member->removeRole(Roles::HEAL)->done(null, function($e) { echo "Remove Heal: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
                         break;
                     case 'Tank':
-                        $reaction->member->removeRole(Roles::TANK)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                        $reaction->member->removeRole(Roles::TANK)->done(null, function($e) { echo "Remove Tank: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
                         break;
                     case 'Range':
-                        $reaction->member->removeRole(Roles::RANGE)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                        $reaction->member->removeRole(Roles::RANGE)->done(null, function($e) { echo "Remove Range: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
                         break;
                     case 'Attack':
-                        $reaction->member->removeRole(Roles::ATTACK)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                        $reaction->member->removeRole(Roles::ATTACK)->done(null, function($e) { echo "Remove Attack: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
                         break;
                     case 'EU':
-                        $reaction->member->setNickname('')->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
-                        // $reaction->member->removeRole(Roles::EU)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                        $reaction->member->setNickname('')->done(null, function($e) { echo "Remove EU: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
                         break;
                     case 'NA':
-                        $reaction->member->setNickname('')->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
-                        // $reaction->member->removeRole(Roles::NA)->done(null, function($e) { echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
+                        $reaction->member->setNickname('')->done(null, function($e) { echo "Remove NA: {$e->getMessage()} | Line [".__LINE__."]\r\n"; });
                         break;
                 }
             }
@@ -186,12 +178,12 @@
                     ]
                 ]);
                 $channel= $discord->getChannel(Channels::WELCOME);
-                $channel->sendMessage('', false, $embed)->done(null, function($e) {
-                    echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n";
+                $channel->sendEmbed($embed)->done(null, function($e) {
+                    echo "New Member: {$e->getMessage()} | Line [".__LINE__."]\r\n";
                 });
             });
         }, function($e) {
-            echo "ERROR: {$e->getMessage()} | Line [".__LINE__."]\r\n";
+            echo "New Member: {$e->getMessage()} | Line [".__LINE__."]\r\n";
         });
 
         // $discord->getLoop()->addPeriodicTimer(3600, function($unknown) use ($discord) {
