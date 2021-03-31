@@ -89,7 +89,7 @@
                 case '!updatenews':
                     $feeds= Feed::all();
                     foreach ($feeds as $feed) {
-                        $feedData= FeedData::get($feed->url);
+                        $feedData= FeedData::get($feed->feed_url);
                         foreach ($feedData->channel->item as $item) {
                             $newsDate= date('YmdHis', strtotime($item->pubDate));
                             if ($newsDate > $feed->updated) {
