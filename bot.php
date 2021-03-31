@@ -109,6 +109,8 @@
                                         echo "New News: {$e->getMessage()} | Line [".__LINE__."]\r\n";
                                     }
                                 );
+                            } else {
+                                echo "Article Already Posted: " . $item->title;
                             }
                         }
                     }
