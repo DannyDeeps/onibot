@@ -87,6 +87,7 @@
                     });
                     break;
                 case '!updatenews':
+                    $newUpdated= false;
                     $feeds= Feed::all();
                     foreach ($feeds as $feed) {
                         $feedData= FeedData::get($feed->feed_url);
@@ -98,27 +99,35 @@
                                 'pubDate' => $articleDate,
                                 'feedUpdated' => $feed->updated
                             ], true);
-                            // if ($newsDate > $feed->updated) {
-                            //     $embed= new Embed($discord, [
-                            //         'title' => (String) $item->title,
-                            //         // 'description' => $item->description,
-                            //         'url' => (String) $item->link,
-                            //         'footer' => [
-                            //             'text' => 'Author: ' . ucwords($item->author) . ' @ ' . date('F j, Y, g:i a', strtotime($item->pubDate))
-                            //         ]
-                            //     ]);
-                            //     $channel= $discord->getChannel(Channels::NTBSS);
-                            //     $channel->sendEmbed($embed)->done(
-                            //         function() use ($item) {
-                            //             echo "New Article: {$item->title} | Line [".__LINE__."]\r\n";
-                            //         }, function($e) {
-                            //             echo "New Article: {$e->getMessage()} | Line [".__LINE__."]\r\n";
-                            //         }
-                            //     );
-                            // } else {
-                            //     echo "Old Article: " . $item->title;
-                            // }
+                            if ($articleDate > $feed->updated) {
+                                if ($articleDate > $newUpdated) {
+                                    $newUpdated= $articleDate;
+                                }
+                                $embed= new Embed($discord, [
+                                    'title' => (String) $item->title,
+                                    // 'description' => $item->description,
+                                    'url' => (String) $item->link,
+                                    'footer' => [
+                                        'text' => 'Author: ' . ucwords($item->author) . ' @ ' . date('F j, Y, g:i a', strtotime($item->pubDate))
+                                    ]
+                                ]);
+                                $channel= $discord->getChannel(Channels::NTBSS);
+                                $channel->sendEmbed($embed)->done(
+                                    function() use ($item) {
+                                        echo "New Article: {$item->title} | Line [".__LINE__."]\r\n";
+                                    }, function($e) {
+                                        echo "New Article: {$e->getMessage()} | Line [".__LINE__."]\r\n";
+                                    }
+                                );
+                            } else {
+                                echo "Old Article: " . $item->title;
+                            }
                         }
+                    }
+                    if (!empty($newUpdated)) {
+                        $feedUpdate= Feed::find($feed->feed_id);
+                        $feedUpdate->updated= $newUpdated;
+                        $feedUpdate->save();
                     }
             }
         });
