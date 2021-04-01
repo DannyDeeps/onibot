@@ -183,7 +183,7 @@
                         );
                         break;
                     case 'NA':
-                        $reaction->member->setNickname("\u{1F1F3}\u{1F1E6}| " . $reaction->member->username)->done(
+                        $reaction->member->setNickname("\u{1F1FA}\u{1F1F8}| " . $reaction->member->username)->done(
                             function() use ($reaction) {
                                 echo "Add NA: {$reaction->member->username} | Line [".__LINE__."]\r\n";
                             }, function($e) {
