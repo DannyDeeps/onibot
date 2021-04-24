@@ -4,20 +4,21 @@
 
     use Discord\Discord;
     use Discord\WebSockets\Event;
+    use Discord\Parts\WebSockets\MessageReaction;
     use Discord\Parts\Channel\Message;
     use Discord\Parts\User\Member;
     use Discord\Parts\Embed\Embed;
-    use Discord\Parts\WebSockets\MessageReaction;
+    use Discord\Parts\Embed\Field;
     use React\Http\Message\Response;
     use React\EventLoop\Factory;
     use Oni\Identify\Reacts;
     use Oni\Identify\Roles;
     use Oni\Identify\Channels;
     use Oni\Feed\Feed as FeedData;
-    use Discord\Parts\Embed\Field;
+    use Oni\Cred\Cred;
 
     $discord = new Discord([
-        'token' => 'ODI1MTU0MTc3NzcyMTU5MDM2.YF5ytg.c6tGhN9N4XPDJQnxeXU0An3EtFw',
+        'token' => Cred::D_TOKEN,
         'loop' => Factory::create(),
         'disabledEvents' => [],
         'loadAllMembers' => true
@@ -38,7 +39,7 @@
                         'color' => '#00FF00'
                     ]);
 
-                    $channel = $discord->getChannel('825144851267977256');
+                    $channel = $discord->getChannel(Channels::ROLES);
                     $promise= $channel->sendMessage('', false, $embed);
                     foreach ($reacts as $react) {
                         $promise->then(function(Message $message) use ($react) {
