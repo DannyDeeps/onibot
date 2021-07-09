@@ -138,42 +138,42 @@
         {
             if (!$reaction->member->user->bot && $reaction->channel_id == Channels::ROLES) {
                 switch ($reaction->emoji->name) {
-                    case 'Heal':
-                        $reaction->member->addRole(Roles::HEAL)->done(
-                            function() use ($reaction) {
-                                echo "Add Heal: {$reaction->member->username} | Line [".__LINE__."]\r\n";
-                            }, function($e) {
-                                echo "Add Heal: {$e->getMessage()} | Line [".__LINE__."]\r\n";
-                            }
-                        );
-                        break;
-                    case 'Tank':
-                        $reaction->member->addRole(Roles::TANK)->done(
-                            function() use ($reaction) {
-                                echo "Add Tank: {$reaction->member->username} | Line [".__LINE__."]\r\n";
-                            }, function($e) {
-                                echo "Add Tank: {$e->getMessage()} | Line [".__LINE__."]\r\n";
-                            }
-                        );
-                        break;
-                    case 'Range':
-                        $reaction->member->addRole(Roles::RANGE)->done(
-                            function() use ($reaction) {
-                                echo "Add Range: {$reaction->member->username} | Line [".__LINE__."]\r\n";
-                            }, function($e) {
-                                echo "Add Range: {$e->getMessage()} | Line [".__LINE__."]\r\n";
-                            }
-                        );;
-                        break;
-                    case 'Attack':
-                        $reaction->member->addRole(Roles::ATTACK)->done(
-                            function() use ($reaction) {
-                                echo "Add Attack: {$reaction->member->username} | Line [".__LINE__."]\r\n";
-                            }, function($e) {
-                                echo "Add Attack: {$e->getMessage()} | Line [".__LINE__."]\r\n";
-                            }
-                        );
-                        break;
+                    // case 'Heal':
+                    //     $reaction->member->addRole(Roles::HEAL)->done(
+                    //         function() use ($reaction) {
+                    //             echo "Add Heal: {$reaction->member->username} | Line [".__LINE__."]\r\n";
+                    //         }, function($e) {
+                    //             echo "Add Heal: {$e->getMessage()} | Line [".__LINE__."]\r\n";
+                    //         }
+                    //     );
+                    //     break;
+                    // case 'Tank':
+                    //     $reaction->member->addRole(Roles::TANK)->done(
+                    //         function() use ($reaction) {
+                    //             echo "Add Tank: {$reaction->member->username} | Line [".__LINE__."]\r\n";
+                    //         }, function($e) {
+                    //             echo "Add Tank: {$e->getMessage()} | Line [".__LINE__."]\r\n";
+                    //         }
+                    //     );
+                    //     break;
+                    // case 'Range':
+                    //     $reaction->member->addRole(Roles::RANGE)->done(
+                    //         function() use ($reaction) {
+                    //             echo "Add Range: {$reaction->member->username} | Line [".__LINE__."]\r\n";
+                    //         }, function($e) {
+                    //             echo "Add Range: {$e->getMessage()} | Line [".__LINE__."]\r\n";
+                    //         }
+                    //     );;
+                    //     break;
+                    // case 'Attack':
+                    // $reaction->member->addRole(Roles::ATTACK)->done(
+                    //     function() use ($reaction) {
+                    //         echo "Add Attack: {$reaction->member->username} | Line [".__LINE__."]\r\n";
+                    //     }, function($e) {
+                    //         echo "Add Attack: {$e->getMessage()} | Line [".__LINE__."]\r\n";
+                    //     }
+                    // );
+                    // break;
                     case 'EU':
                         $reaction->member->setNickname("\u{1F1EA}\u{1F1FA}| " . $reaction->member->username)->done(
                             function() use ($reaction) {
@@ -201,42 +201,42 @@
         {
             if (!$reaction->member->user->bot && $reaction->channel_id == Channels::ROLES) {
                 switch ($reaction->emoji->name) {
-                    case 'Heal':
-                        $reaction->member->removeRole(Roles::HEAL)->done(
-                            function() use ($reaction) {
-                                echo "Remove Heal: {$reaction->member->username} | Line [".__LINE__."]\r\n";
-                            }, function($e) {
-                                echo "Remove Heal: {$e->getMessage()} | Line [".__LINE__."]\r\n";
-                            }
-                        );
-                        break;
-                    case 'Tank':
-                        $reaction->member->removeRole(Roles::TANK)->done(
-                            function() use ($reaction) {
-                                echo "Remove Tank: {$reaction->member->username} | Line [".__LINE__."]\r\n";
-                            }, function($e) {
-                                echo "Remove Tank: {$e->getMessage()} | Line [".__LINE__."]\r\n";
-                            }
-                        );
-                        break;
-                    case 'Range':
-                        $reaction->member->removeRole(Roles::RANGE)->done(
-                            function() use ($reaction) {
-                                echo "Remove Range: {$reaction->member->username} | Line [".__LINE__."]\r\n";
-                            }, function($e) {
-                                echo "Remove Range: {$e->getMessage()} | Line [".__LINE__."]\r\n";
-                            }
-                        );
-                        break;
-                    case 'Attack':
-                        $reaction->member->removeRole(Roles::ATTACK)->done(
-                            function() use ($reaction) {
-                                echo "Remove Attack: {$reaction->member->username} | Line [".__LINE__."]\r\n";
-                            }, function($e) {
-                                echo "Remove Attack: {$e->getMessage()} | Line [".__LINE__."]\r\n";
-                            }
-                        );
-                        break;
+                    // case 'Heal':
+                    //     $reaction->member->removeRole(Roles::HEAL)->done(
+                    //         function() use ($reaction) {
+                    //             echo "Remove Heal: {$reaction->member->username} | Line [".__LINE__."]\r\n";
+                    //         }, function($e) {
+                    //             echo "Remove Heal: {$e->getMessage()} | Line [".__LINE__."]\r\n";
+                    //         }
+                    //     );
+                    //     break;
+                    // case 'Tank':
+                    //     $reaction->member->removeRole(Roles::TANK)->done(
+                    //         function() use ($reaction) {
+                    //             echo "Remove Tank: {$reaction->member->username} | Line [".__LINE__."]\r\n";
+                    //         }, function($e) {
+                    //             echo "Remove Tank: {$e->getMessage()} | Line [".__LINE__."]\r\n";
+                    //         }
+                    //     );
+                    //     break;
+                    // case 'Range':
+                    //     $reaction->member->removeRole(Roles::RANGE)->done(
+                    //         function() use ($reaction) {
+                    //             echo "Remove Range: {$reaction->member->username} | Line [".__LINE__."]\r\n";
+                    //         }, function($e) {
+                    //             echo "Remove Range: {$e->getMessage()} | Line [".__LINE__."]\r\n";
+                    //         }
+                    //     );
+                    //     break;
+                    // case 'Attack':
+                    //     $reaction->member->removeRole(Roles::ATTACK)->done(
+                    //         function() use ($reaction) {
+                    //             echo "Remove Attack: {$reaction->member->username} | Line [".__LINE__."]\r\n";
+                    //         }, function($e) {
+                    //             echo "Remove Attack: {$e->getMessage()} | Line [".__LINE__."]\r\n";
+                    //         }
+                    //     );
+                    //     break;
                     case 'EU':
                         $reaction->member->setNickname('')->done(
                             function() use ($reaction) {
@@ -283,50 +283,50 @@
             });
         });
 
-        $discord->getLoop()->addPeriodicTimer(43200, function($unknown) use ($discord) {
-            $newUpdated= false;
-            $feeds= Feed::all();
-            foreach ($feeds as $feed) {
-                $feedData= FeedData::get($feed->feed_url);
-                foreach ($feedData->channel->item as $item) {
-                    $articleDate= date('YmdHis', strtotime($item->pubDate));
-                    echo print_r([
-                        'title' => (String) $item->title,
-                        'link' => (String) $item->link,
-                        'pubDate' => $articleDate,
-                        'feedUpdated' => $feed->updated
-                    ], true);
-                    if ($articleDate > $feed->updated) {
-                        if ($articleDate > $newUpdated) {
-                            $newUpdated= $articleDate;
-                        }
-                        $embed= new Embed($discord, [
-                            'title' => (String) $item->title,
-                            // 'description' => $item->description,
-                            'url' => (String) $item->link,
-                            'footer' => [
-                                'text' => 'Author: ' . ucwords($item->author) . ' @ ' . date('F j, Y, g:i a', strtotime($item->pubDate))
-                            ]
-                        ]);
-                        $channel= $discord->getChannel(Channels::NTBSS);
-                        $channel->sendEmbed($embed)->done(
-                            function() use ($item) {
-                                echo "New Article: {$item->title} | Line [".__LINE__."]\r\n";
-                            }, function($e) {
-                                echo "New Article: {$e->getMessage()} | Line [".__LINE__."]\r\n";
-                            }
-                        );
-                    } else {
-                        echo "Old Article: " . $item->title . "\r\n";
-                    }
-                }
-            }
-            if (!empty($newUpdated)) {
-                $feedUpdate= Feed::find($feed->feed_id);
-                $feedUpdate->updated= $newUpdated;
-                $feedUpdate->save();
-            }
-        });
+        // $discord->getLoop()->addPeriodicTimer(43200, function($unknown) use ($discord) {
+        //     $newUpdated= false;
+        //     $feeds= Feed::all();
+        //     foreach ($feeds as $feed) {
+        //         $feedData= FeedData::get($feed->feed_url);
+        //         foreach ($feedData->channel->item as $item) {
+        //             $articleDate= date('YmdHis', strtotime($item->pubDate));
+        //             echo print_r([
+        //                 'title' => (String) $item->title,
+        //                 'link' => (String) $item->link,
+        //                 'pubDate' => $articleDate,
+        //                 'feedUpdated' => $feed->updated
+        //             ], true);
+        //             if ($articleDate > $feed->updated) {
+        //                 if ($articleDate > $newUpdated) {
+        //                     $newUpdated= $articleDate;
+        //                 }
+        //                 $embed= new Embed($discord, [
+        //                     'title' => (String) $item->title,
+        //                     // 'description' => $item->description,
+        //                     'url' => (String) $item->link,
+        //                     'footer' => [
+        //                         'text' => 'Author: ' . ucwords($item->author) . ' @ ' . date('F j, Y, g:i a', strtotime($item->pubDate))
+        //                     ]
+        //                 ]);
+        //                 $channel= $discord->getChannel(Channels::NTBSS);
+        //                 $channel->sendEmbed($embed)->done(
+        //                     function() use ($item) {
+        //                         echo "New Article: {$item->title} | Line [".__LINE__."]\r\n";
+        //                     }, function($e) {
+        //                         echo "New Article: {$e->getMessage()} | Line [".__LINE__."]\r\n";
+        //                     }
+        //                 );
+        //             } else {
+        //                 echo "Old Article: " . $item->title . "\r\n";
+        //             }
+        //         }
+        //     }
+        //     if (!empty($newUpdated)) {
+        //         $feedUpdate= Feed::find($feed->feed_id);
+        //         $feedUpdate->updated= $newUpdated;
+        //         $feedUpdate->save();
+        //     }
+        // });
     });
 
     $discord->run();
