@@ -1,0 +1,2 @@
+# Onibot
+Custom Discord bot.
